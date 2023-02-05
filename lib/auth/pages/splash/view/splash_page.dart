@@ -7,6 +7,9 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: null,
+        appBar: AppBar(
+          title: const Text('SplashScreen'),
+        ),
+        body: SizedBox(),
       );
 }

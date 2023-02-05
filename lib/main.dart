@@ -1,5 +1,7 @@
-import 'package:fforward_adm/common/pages/splash/view/splash_page.dart';
+import 'package:fforward_adm/auth/pages/splash/view/splash_page.dart';
+import 'package:fforward_adm/controller/global_bindings.dart';
 import 'package:fforward_adm/pages.dart';
+import 'package:fforward_adm/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +13,7 @@ void main() async {
     name: "fforward-app",
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const MyApp());
 }
 
@@ -20,7 +23,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.light,
+        theme: AppTheme.lightTheme,
         initialRoute: SplashPage.routeName,
         getPages: GetPages.pages,
+        initialBinding: GlobalBindings(),
       );
 }

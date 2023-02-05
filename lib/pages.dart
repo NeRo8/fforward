@@ -1,10 +1,10 @@
-import 'package:fforward_adm/common/pages/dashboard/controller/dashboard_bindings.dart';
-import 'package:fforward_adm/common/pages/dashboard/view/dashboard_page.dart';
-import 'package:fforward_adm/common/pages/login/controller/login_bindings.dart';
-import 'package:fforward_adm/common/pages/login/view/login_page.dart';
-import 'package:fforward_adm/common/pages/registration/controller/registration_bindings.dart';
-import 'package:fforward_adm/common/pages/registration/view/registration_page.dart';
-import 'package:fforward_adm/common/pages/splash/view/splash_page.dart';
+import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_bindings.dart';
+import 'package:fforward_adm/auth/pages/dashboard/view/dashboard_page.dart';
+import 'package:fforward_adm/auth/pages/login/controller/login_bindings.dart';
+import 'package:fforward_adm/auth/pages/login/view/login_page.dart';
+import 'package:fforward_adm/auth/pages/registration/controller/registration_bindings.dart';
+import 'package:fforward_adm/auth/pages/registration/view/registration_page.dart';
+import 'package:fforward_adm/auth/pages/splash/view/splash_page.dart';
 import 'package:get/get.dart';
 
 class GetPages {
