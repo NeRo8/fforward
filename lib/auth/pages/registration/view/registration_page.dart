@@ -67,8 +67,12 @@ class RegistrationPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
-                  validator: (value) =>
-                      value!.isEmpty ? AppStrings.requiredField : null,
+                  validator: (value) => value!.isEmpty
+                      ? AppStrings.requiredField
+                      : _controller.passwordController.text !=
+                              _controller.confirmPasswordController.text
+                          ? AppStrings.passwordsNotMatch
+                          : null,
                   controller: _controller.passwordController,
                   decoration: const InputDecoration(
                     labelText: AppStrings.password,
@@ -79,8 +83,12 @@ class RegistrationPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
-                  validator: (value) =>
-                      value!.isEmpty ? AppStrings.requiredField : null,
+                  validator: (value) => value!.isEmpty
+                      ? AppStrings.requiredField
+                      : _controller.passwordController.text !=
+                              _controller.confirmPasswordController.text
+                          ? AppStrings.passwordsNotMatch
+                          : null,
                   controller: _controller.confirmPasswordController,
                   decoration: const InputDecoration(
                     labelText: AppStrings.confirmPassword,

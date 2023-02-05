@@ -18,4 +18,6 @@ abstract class AppStrings {
   static const hintEnterLastName = 'Enter last name';
 
   static const requiredField = 'Required field';
+
+  static const passwordsNotMatch = 'Passwords do not match';
 }
