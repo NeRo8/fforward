@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "584232749575",
+    "firebase_url": "https://fforward-704a0-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fforward-704a0",
+    "storage_bucket": "fforward-704a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584232749575:android:97da20b182f3a7f68db8a2",
+        "android_client_info": {
+          "package_name": "com.example.fforward_adm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584232749575-co0958uijh1en9j8aifbjo2g76h41vff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpDIEfbe350dZHIyL3OGaYoYHyn5-j5uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584232749575-co0958uijh1en9j8aifbjo2g76h41vff.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584232749575-rmkgr6cg2jvi8bn9nkjt65695vmdn6ki.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fforwardAdm"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
