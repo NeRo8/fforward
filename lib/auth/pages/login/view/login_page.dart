@@ -1,6 +1,5 @@
 import 'package:fforward_adm/auth/pages/login/controller/login_controllers.dart';
 import 'package:fforward_adm/auth/pages/registration/view/registration_page.dart';
-import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 import 'package:fforward_adm/widgets/form_container.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Login'),
+          title: const Text('Sign in'),
           actions: [
             IconButton(
               onPressed: onTapRegistration,
@@ -34,7 +33,6 @@ class LoginPage extends StatelessWidget {
             key: _controller.formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   AppStrings.signIn,
@@ -45,6 +43,8 @@ class LoginPage extends StatelessWidget {
                   height: 52,
                 ),
                 TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? AppStrings.requiredField : null,
                   controller: _controller.emailController,
                   decoration: const InputDecoration(
                     labelText: AppStrings.email,
@@ -55,6 +55,8 @@ class LoginPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? AppStrings.requiredField : null,
                   controller: _controller.passwordController,
                   decoration: const InputDecoration(
                     labelText: AppStrings.password,
@@ -66,7 +68,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: _controller.onTapSubmit,
-                  child: const Text('Submit'),
+                  child: const Text(AppStrings.signIn),
                 )
               ],
             ),

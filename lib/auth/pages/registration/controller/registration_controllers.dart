@@ -30,10 +30,10 @@ class RegistrationController extends GetxController {
 
   Future<void> onTabSubmit() async {
     try {
-      if (!formKey.currentState!.validate()) return;
-
-      final UserCredential user = await _authService.onSignUp(
-          emailController.text, passwordController.text);
+      if (formKey.currentState!.validate()) {
+        final UserCredential user = await _authService.onSignUp(
+            emailController.text, passwordController.text);
+      }
     } on FirebaseAuthException catch (err) {
       Get.snackbar("Error", err.message ?? err.code);
     }
