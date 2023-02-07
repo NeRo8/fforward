@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final FBAuthService _authService;
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> logFormKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -23,7 +23,7 @@ class LoginController extends GetxController {
 
   Future<void> onTapSubmit() async {
     try {
-      if (!formKey.currentState!.validate()) return;
+      if (!logFormKey.currentState!.validate()) return;
 
       await _authService.onSignIn(
         emailController.text,
@@ -33,6 +33,7 @@ class LoginController extends GetxController {
       Get.snackbar(
         "Error",
         err.message ?? err.code,
+        snackPosition: SnackPosition.BOTTOM,
       );
     }
   }

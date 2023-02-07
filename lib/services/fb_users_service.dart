@@ -4,16 +4,12 @@ import 'package:firebase_database/firebase_database.dart';
 class FBUsersService {
   final FirebaseDatabase _fbDB;
 
-  final DatabaseReference _table;
+  const FBUsersService({fbDB}) : _fbDB = fbDB;
 
-  const FBUsersService({fbDB, table})
-      : _fbDB = fbDB,
-        _table = table;
+  DatabaseReference get table => _fbDB.ref('users');
 
-  DatabaseReference get table => _table;
-
-  Future<void> create(Users user) async {
-    _fbDB.ref('users/${user.uid}').set(user);
+  Future<void> createUser(Users user) async {
+    _fbDB.ref('users/${user.uid}').set(user.toJson());
   }
 
   Future<void> updateUserById(Users user) async {}

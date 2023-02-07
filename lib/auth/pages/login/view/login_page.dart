@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
         ),
         body: FormContainer(
           child: Form(
-            key: _controller.formKey,
+            key: _controller.logFormKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -55,6 +55,7 @@ class LoginPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
+                  obscureText: true,
                   validator: (value) =>
                       value!.isEmpty ? AppStrings.requiredField : null,
                   controller: _controller.passwordController,

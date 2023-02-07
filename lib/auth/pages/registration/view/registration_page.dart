@@ -18,7 +18,7 @@ class RegistrationPage extends StatelessWidget {
         ),
         body: FormContainer(
           child: Form(
-            key: _controller.formKey,
+            key: _controller.regFormKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -67,6 +67,7 @@ class RegistrationPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
+                  obscureText: true,
                   validator: (value) => value!.isEmpty
                       ? AppStrings.requiredField
                       : _controller.passwordController.text !=
@@ -83,6 +84,7 @@ class RegistrationPage extends StatelessWidget {
                   height: 32,
                 ),
                 TextFormField(
+                  obscureText: true,
                   validator: (value) => value!.isEmpty
                       ? AppStrings.requiredField
                       : _controller.passwordController.text !=

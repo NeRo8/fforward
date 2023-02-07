@@ -8,7 +8,7 @@ class Users {
   final String firstname;
   final String lastname;
   final String email;
-  final UsersPermission permission;
+  final String permission;
 
   const Users({
     required this.uid,

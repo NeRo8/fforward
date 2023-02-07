@@ -55,8 +55,6 @@ class AppTheme {
 
             if (states.contains(MaterialState.error)) {
               color = AppColors.errorColor;
-            } else if (states.contains(MaterialState.focused)) {
-              color = AppColors.primaryColor;
             }
 
             return TextStyle(

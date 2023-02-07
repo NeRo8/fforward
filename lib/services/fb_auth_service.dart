@@ -5,13 +5,13 @@ class FBAuthService {
 
   FBAuthService({fbService}) : _fbService = fbService;
 
-  Future<UserCredential> onSignIn(String email, String password) async =>
+  Future<UserCredential> onSignUp(String email, String password) async =>
       _fbService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-  Future<UserCredential> onSignUp(String email, String password) async =>
+  Future<UserCredential> onSignIn(String email, String password) async =>
       _fbService.signInWithEmailAndPassword(
         email: email,
         password: password,

@@ -14,9 +14,9 @@ class GlobalController extends GetxController {
 
     _fbAuthService.authStateChanges().listen((User? user) {
       if (user != null) {
-        Get.offNamed(DashboardPage.routeName);
+        Get.offAllNamed(DashboardPage.routeName);
       } else {
-        Get.offNamed(LoginPage.routeName);
+        Get.offAllNamed(LoginPage.routeName);
       }
     });
   }
