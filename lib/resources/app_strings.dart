@@ -20,4 +20,6 @@ abstract class AppStrings {
   static const requiredField = 'Required field';
 
   static const passwordsNotMatch = 'Passwords do not match';
+
+  static const users = 'Users';
 }

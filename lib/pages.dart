@@ -1,3 +1,5 @@
+import 'package:fforward_adm/admin/users/users_list/controller/user_list_bindings.dart';
+import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_bindings.dart';
 import 'package:fforward_adm/auth/pages/dashboard/view/dashboard_page.dart';
 import 'package:fforward_adm/auth/pages/login/controller/login_bindings.dart';
@@ -27,6 +29,12 @@ class GetPages {
           name: DashboardPage.routeName,
           page: DashboardPage.new,
           binding: DashboardBindings(),
+        ),
+        //MainApplication
+        GetPage(
+          name: UsersListPage.routeName,
+          page: UsersListPage.new,
+          binding: UsersListBindings(),
         ),
       ];
 }

@@ -18,7 +18,7 @@ class Users {
     required this.permission,
   });
 
-  Users.fromJson(Map<String, dynamic> json)
+  Users.fromJson(Map<dynamic, dynamic> json)
       : uid = json['uid'],
         firstname = json['firstname'],
         lastname = json['lastname'],
