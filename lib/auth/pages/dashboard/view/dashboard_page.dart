@@ -1,3 +1,4 @@
+import 'package:fforward_adm/admin/developer_levels/developer_levels_list/view/developer_levels_list.dart';
 import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_controllers.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
@@ -39,6 +40,10 @@ class DashboardPage extends StatelessWidget {
                 CommonButton(
                   title: AppStrings.users,
                   onTap: () => Get.toNamed(UsersListPage.routeName),
+                ),
+                CommonButton(
+                  title: AppStrings.developerLevels,
+                  onTap: () => Get.toNamed(DeveloperLevelsList.routeName),
                 ),
               ],
             ),

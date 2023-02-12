@@ -22,4 +22,5 @@ abstract class AppStrings {
   static const passwordsNotMatch = 'Passwords do not match';
 
   static const users = 'Users';
+  static const developerLevels = 'Developer levels';
 }

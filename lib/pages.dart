@@ -1,3 +1,5 @@
+import 'package:fforward_adm/admin/developer_levels/developer_levels_list/controller/developer_levels_list_bindings.dart';
+import 'package:fforward_adm/admin/developer_levels/developer_levels_list/view/developer_levels_list.dart';
 import 'package:fforward_adm/admin/users/users_list/controller/user_list_bindings.dart';
 import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_bindings.dart';
@@ -36,5 +38,10 @@ class GetPages {
           page: UsersListPage.new,
           binding: UsersListBindings(),
         ),
+        GetPage(
+          name: DeveloperLevelsList.routeName,
+          page: DeveloperLevelsList.new,
+          binding: DeveloperLevelsListBindings(),
+        )
       ];
 }
