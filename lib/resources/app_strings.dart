@@ -23,6 +23,8 @@ abstract class AppStrings {
 
   static const submit = "Submit";
 
+  //Tables
   static const users = 'Users';
   static const developerLevels = 'Developer levels';
+  static const technology = 'Technology';
 }

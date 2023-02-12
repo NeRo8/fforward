@@ -1,3 +1,4 @@
+import 'package:fforward_adm/admin/technologies/technology_detail/view/technology_detail.dart';
 import 'package:fforward_adm/admin/technologies/technology_list/controller/technology_list_controller.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 import 'package:fforward_adm/widgets/tables/item_list_table.dart';
@@ -13,11 +14,11 @@ class TechnologyList extends StatelessWidget {
 
   TechnologyList({super.key});
 
-  void onTapCreateDeveloperLevel() => Get.toNamed(TechnologyDatail.routeName);
+  void onTapCreateDeveloperLevel() => Get.toNamed(TechnologyDetail.routeName);
 
   @override
   Widget build(BuildContext context) => PageContainer(
-        headerTitle: AppStrings.developerLevels,
+        headerTitle: AppStrings.technology,
         headerActions: [
           IconButton(
             onPressed: onTapCreateDeveloperLevel,

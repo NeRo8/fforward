@@ -1,4 +1,5 @@
 import 'package:fforward_adm/admin/developer_levels/developer_levels_list/view/developer_levels_list.dart';
+import 'package:fforward_adm/admin/technologies/technology_list/view/technology_list.dart';
 import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_controllers.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
@@ -17,45 +18,33 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard'),
-        actions: [
-          IconButton(
-            onPressed: _controller.onTabLogout,
-            icon: const Icon(Icons.logout),
-          ),
-          const SizedBox(width: 16)
-        ],
-      ),
-      body: Row(children: [
-        Expanded(
-          flex: 2,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: AppColors.backgroundColor,
+        appBar: AppBar(
+          title: const Text('Dashboard'),
+          actions: [
+            IconButton(
+              onPressed: _controller.onTabLogout,
+              icon: const Icon(Icons.logout),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CommonButton(
-                  title: AppStrings.users,
-                  onTap: () => Get.toNamed(UsersListPage.routeName),
-                ),
-                CommonButton(
-                  title: AppStrings.developerLevels,
-                  onTap: () => Get.toNamed(DeveloperLevelsList.routeName),
-                ),
-              ],
+            const SizedBox(width: 16)
+          ],
+        ),
+        body: Wrap(
+          children: [
+            CommonButton(
+              title: AppStrings.users,
+              onTap: () => Get.toNamed(UsersListPage.routeName),
             ),
-          ),
+            CommonButton(
+              title: AppStrings.developerLevels,
+              onTap: () => Get.toNamed(DeveloperLevelsList.routeName),
+            ),
+            CommonButton(
+              title: AppStrings.technology,
+              onTap: () => Get.toNamed(TechnologyList.routeName),
+            ),
+          ],
         ),
-        Expanded(
-          flex: 9,
-          child: Column(
-            children: [],
-          ),
-        ),
-      ]));
+      );
 }
 
 class CommonButton extends StatelessWidget {

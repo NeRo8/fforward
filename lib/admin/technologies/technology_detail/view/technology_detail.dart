@@ -14,7 +14,7 @@ class TechnologyDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PageContainer(
-        headerTitle: AppStrings.developerLevels,
+        headerTitle: AppStrings.technology,
         child: Form(
           key: _controller.technologyFormKey,
           child: Padding(
