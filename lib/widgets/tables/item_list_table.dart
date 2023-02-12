@@ -17,7 +17,7 @@ class ItemListTable extends StatelessWidget {
           children: [
             CTableCell(flex: 2, title: "ID"),
             CVerticalDivider(),
-            CTableCell(flex: 4, title: "Title"),
+            CTableCell(flex: 8, title: "Title"),
           ],
         ),
         Expanded(
@@ -27,9 +27,9 @@ class ItemListTable extends StatelessWidget {
               final Map user = (snapshot.value as Map);
               return CTableRow(
                 children: [
-                  CTableCell(flex: 2, title: user['id']),
+                  CTableCell(flex: 2, title: user['id'] ?? "None"),
                   const CVerticalDivider(),
-                  CTableCell(flex: 4, title: user['title']),
+                  CTableCell(flex: 8, title: user['title'] ?? "None"),
                 ],
               );
             },

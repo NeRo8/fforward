@@ -11,9 +11,12 @@ class FBDeveloperLevelsService {
 
   DatabaseReference get table => _fbDB.ref(tableName);
 
-  Future<void> createDeveloperLevel(DeveloperLevel user) async {}
+  Future<void> createDeveloperLevel({required String title}) async {
+    DatabaseReference recordRef = table.push();
+    recordRef.set({'id': recordRef.key, 'title': title});
+  }
 
-  Future<void> updateDeveloperLevelById(DeveloperLevel user) async {}
+  Future<void> updateDeveloperLevelById(DeveloperLevel developerLevel) async {}
 
   Future<void> deleteDeveloperLevelById(String id) async {}
 

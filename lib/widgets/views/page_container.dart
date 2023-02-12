@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 
 class PageContainer extends StatelessWidget {
   final String headerTitle;
+  final List<Widget>? headerActions;
   final Widget child;
 
-  const PageContainer(
-      {super.key, required this.headerTitle, required this.child});
+  const PageContainer({
+    super.key,
+    required this.headerTitle,
+    this.headerActions,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(headerTitle),
+          actions: headerActions,
         ),
         body: SafeArea(
           child: Container(

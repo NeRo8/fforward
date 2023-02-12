@@ -9,7 +9,9 @@ class DeveloperLevelsListBindings extends Bindings {
     final FBDeveloperLevelsService developerLevelsService =
         FBDeveloperLevelsService(fbDB: FirebaseDatabase.instance);
 
-    Get.lazyPut(() => DeveloperLevelsListController(
-        developerLevelsService: developerLevelsService));
+    Get.lazyPut(
+      () => DeveloperLevelsListController(
+          developerLevelsService: developerLevelsService),
+    );
   }
 }

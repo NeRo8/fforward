@@ -1,8 +1,8 @@
 abstract class ListItem {
-  final String? id;
+  final String id;
   final String title;
 
-  const ListItem({this.id, required this.title});
+  const ListItem({required this.id, required this.title});
 
   ListItem.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
