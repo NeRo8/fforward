@@ -1,10 +1,10 @@
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class FormContainer extends StatelessWidget {
+class AuthFormContainer extends StatelessWidget {
   final Widget child;
 
-  const FormContainer({super.key, required this.child});
+  const AuthFormContainer({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) => SafeArea(

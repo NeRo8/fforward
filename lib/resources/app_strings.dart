@@ -27,4 +27,5 @@ abstract class AppStrings {
   static const users = 'Users';
   static const developerLevels = 'Developer levels';
   static const technology = 'Technology';
+  static const questions = 'Questions';
 }
