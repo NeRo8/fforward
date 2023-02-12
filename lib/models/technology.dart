@@ -1,5 +1,5 @@
 import './models.dart';
 
 class Technology extends ListItem {
-  const Technology({super.id, required super.title});
+  const Technology({required super.id, required super.title});
 }

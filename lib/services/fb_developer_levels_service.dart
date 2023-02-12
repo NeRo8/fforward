@@ -3,7 +3,7 @@ import 'package:fforward_adm/models/developer_level.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class FBDeveloperLevelsService {
-  static const tableName = 'developer_levels';
+  static const tableName = 'developer_levels_table';
 
   final FirebaseDatabase _fbDB;
 

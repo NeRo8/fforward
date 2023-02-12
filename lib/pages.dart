@@ -2,6 +2,10 @@ import 'package:fforward_adm/admin/developer_levels/developer_levels_detail/cont
 import 'package:fforward_adm/admin/developer_levels/developer_levels_detail/view/developer_levels_detail.dart';
 import 'package:fforward_adm/admin/developer_levels/developer_levels_list/controller/developer_levels_list_bindings.dart';
 import 'package:fforward_adm/admin/developer_levels/developer_levels_list/view/developer_levels_list.dart';
+import 'package:fforward_adm/admin/technologies/technology_detail/controller/technology_detail_bindings.dart';
+import 'package:fforward_adm/admin/technologies/technology_detail/view/technology_detail.dart';
+import 'package:fforward_adm/admin/technologies/technology_list/controller/technology_list_bindings.dart';
+import 'package:fforward_adm/admin/technologies/technology_list/view/technology_list.dart';
 import 'package:fforward_adm/admin/users/users_list/controller/user_list_bindings.dart';
 import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_bindings.dart';
@@ -49,6 +53,16 @@ class GetPages {
           name: DeveloperLevelsDetail.routeName,
           page: DeveloperLevelsDetail.new,
           binding: DeveloperLevelsDetailBindings(),
+        ),
+        GetPage(
+          name: TechnologyList.routeName,
+          page: TechnologyList.new,
+          binding: TechnologyListBindings(),
+        ),
+        GetPage(
+          name: TechnologyDetail.routeName,
+          page: TechnologyDetail.new,
+          binding: TechnologyDetailBindings(),
         )
       ];
 }
