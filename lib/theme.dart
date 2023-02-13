@@ -25,6 +25,8 @@ class AppTheme {
         ),
         inputDecorationTheme: InputDecorationTheme(
           floatingLabelBehavior: FloatingLabelBehavior.always,
+          filled: true,
+          fillColor: Colors.white,
           labelStyle:
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
             Color color = AppColors.secondaryColor;
@@ -60,6 +62,9 @@ class AppTheme {
             return TextStyle(
                 color: color, letterSpacing: 1.1, fontWeight: FontWeight.w200);
           }),
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.borderColor),
+          ),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.borderColor),
           ),
