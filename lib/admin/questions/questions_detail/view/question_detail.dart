@@ -1,4 +1,5 @@
 import 'package:fforward_adm/admin/questions/questions_detail/controller/question_detail_controller.dart';
+import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 
 import 'package:fforward_adm/widgets/views/form_container.dart';
@@ -17,58 +18,61 @@ class QuestionDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PageContainer(
         headerTitle: AppStrings.questions,
-        child: FormContainer(
-          formKey: _controller.questionFormKey,
-          onTapSubmit: _controller.onTapSubmit,
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Technology',
-                hintText: 'Select technology',
+        child: Obx(
+          () => FormContainer(
+            formKey: _controller.questionFormKey,
+            onTapSubmit: _controller.onTapSubmit,
+            children: [
+              RelativeFormField(
+                value: _controller.technologyLabel,
+                list: _controller.technologies,
+                onTap: _controller.onTapTechnology,
+                hint: 'Select technology',
+                label: 'Technology',
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Developer level',
-                hintText: 'Select developer level',
+              const SizedBox(
+                height: 32,
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextFormField(
-              controller: _controller.titleController,
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                hintText: 'Enter title',
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Developer level',
+                  hintText: 'Select developer level',
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextFormField(
-              maxLines: 20,
-              decoration: const InputDecoration(
-                labelText: 'Description',
-                hintText: 'Enter description',
+              const SizedBox(
+                height: 32,
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Urls',
-                hintText: 'Select urls',
+              TextFormField(
+                controller: _controller.titleController,
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                  hintText: 'Enter title',
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-          ],
+              const SizedBox(
+                height: 32,
+              ),
+              TextFormField(
+                maxLines: 20,
+                decoration: const InputDecoration(
+                  labelText: 'Description',
+                  hintText: 'Enter description',
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Urls',
+                  hintText: 'Select urls',
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+            ],
+          ),
         ),
       );
 }

@@ -14,10 +14,13 @@ class QuestionDetailBindings extends Bindings {
     final FirebaseDatabase fbDB = FirebaseDatabase.instance;
 
     final FBQuestionService questionService = FBQuestionService(fbDB: fbDB);
+    final FBTechnologyService technologyService =
+        FBTechnologyService(fbDB: fbDB);
 
     Get.lazyPut(
       () => QuestionDetailController(
         questionService: questionService,
+        technologyService: technologyService,
         args: args,
       ),
     );

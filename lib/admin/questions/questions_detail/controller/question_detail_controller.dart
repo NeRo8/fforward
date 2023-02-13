@@ -1,14 +1,19 @@
 import 'package:fforward_adm/admin/questions/questions_detail/view/question_detail_args.dart';
+import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_question_service.dart';
+import 'package:fforward_adm/services/fb_technology_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
+  final FBTechnologyService _technologyService;
   final QuestionDetailArgs? _args;
 
+  //collection data
+  final RxList<Technology> technologies = <Technology>[].obs;
+  //Form fields
   final GlobalKey<FormState> questionFormKey = GlobalKey<FormState>();
-
   final RxString technologyId = ''.obs;
   final RxString developerLevelId = ''.obs;
   final TextEditingController titleController = TextEditingController();
@@ -16,9 +21,31 @@ class QuestionDetailController extends GetxController {
 
   QuestionDetailController({
     questionService,
+    technologyService,
     args,
   })  : _questionService = questionService,
+        _technologyService = technologyService,
         _args = args;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+    _technologyService.table.get().then((snapshot) {
+      final Map data = snapshot.value as Map;
+
+      for (var technology in data.values) {
+        technologies.add(Technology.fromJson(technology));
+      }
+    });
+  }
+
+  String get technologyLabel =>
+      technologies
+          .firstWhereOrNull((tech) => tech.id == technologyId.value)
+          ?.title ??
+      "";
 
   void onTapSubmit() async {
     try {
