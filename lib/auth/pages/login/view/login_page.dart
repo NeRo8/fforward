@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
           ],
         ),
         body: AuthFormContainer(
-          child: AuthFormContainer(
+          child: Form(
             key: _controller.logFormKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,

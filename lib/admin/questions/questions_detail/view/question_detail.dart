@@ -1,5 +1,6 @@
 import 'package:fforward_adm/admin/questions/questions_detail/controller/question_detail_controller.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
+import 'package:fforward_adm/widgets/fields/technology_form_field/technology_form_field.dart';
 import 'package:fforward_adm/widgets/views/form_container.dart';
 import 'package:fforward_adm/widgets/views/page_container.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +21,16 @@ class QuestionDetail extends StatelessWidget {
           formKey: _controller.questionFormKey,
           onTapSubmit: _controller.onTapSubmit,
           children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Developer level',
-                hintText: 'Select developer level',
-              ),
+            TechnologyFormField(
+              selectedTechnologyId: _controller.technologyId.text,
             ),
             const SizedBox(
               height: 32,
             ),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Technology',
-                hintText: 'Select technology',
+                labelText: 'Developer level',
+                hintText: 'Select developer level',
               ),
             ),
             const SizedBox(

@@ -5,17 +5,21 @@ import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
+
   final QuestionDetailArgs? _args;
 
   final GlobalKey<FormState> questionFormKey = GlobalKey<FormState>();
+  final TextEditingController technologyId = TextEditingController();
 
-  QuestionDetailController({questionService, args})
-      : _questionService = questionService,
+  QuestionDetailController({
+    questionService,
+    args,
+  })  : _questionService = questionService,
         _args = args;
 
   void onTapSubmit() async {
-    if (questionFormKey.currentState!.validate()) {
-      //TODO:
-    }
+    try {
+      if (questionFormKey.currentState!.validate()) {}
+    } catch (e) {}
   }
 }
