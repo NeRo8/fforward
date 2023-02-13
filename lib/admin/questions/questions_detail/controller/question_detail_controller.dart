@@ -1,5 +1,6 @@
 import 'package:fforward_adm/admin/questions/questions_detail/view/question_detail_args.dart';
 import 'package:fforward_adm/models/developer_level.dart';
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_developer_levels_service.dart';
 import 'package:fforward_adm/services/fb_question_service.dart';
@@ -22,6 +23,7 @@ class QuestionDetailController extends GetxController {
   final RxString developerLevelId = ''.obs;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final RxMap<String, Url> urls = RxMap();
 
   QuestionDetailController({
     questionService,
@@ -35,7 +37,6 @@ class QuestionDetailController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
 
     _technologyService.table.get().then((snapshot) {
@@ -74,6 +75,10 @@ class QuestionDetailController extends GetxController {
   void onTapDeveloperLevel(String devLevId) {
     developerLevelId.value = devLevId;
   }
+
+  void onCreateUrl(Url value) => urls[value.url] = value;
+
+  void onRemoveUrl(String url) => urls.remove(url);
 
   void onTapSubmit() async {
     try {
