@@ -4,6 +4,7 @@ import 'resources/app_colors.dart';
 
 class AppTheme {
   static ThemeData get lightTheme => ThemeData(
+        fontFamily: 'Menlo',
         scaffoldBackgroundColor: AppColors.backgroundColor,
         appBarTheme: const AppBarTheme(
           backgroundColor: AppColors.primaryColor,
@@ -16,8 +17,12 @@ class AppTheme {
         ),
         textTheme: const TextTheme(
           displayMedium: TextStyle(
-              color: AppColors.textColor, fontWeight: FontWeight.w100),
-          titleMedium: TextStyle(color: AppColors.textColor),
+            color: AppColors.textColor,
+            fontWeight: FontWeight.w100,
+          ),
+          titleMedium: TextStyle(
+            color: AppColors.textColor,
+          ),
         ),
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: AppColors.primaryColor,
