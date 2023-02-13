@@ -33,11 +33,12 @@ class QuestionDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Developer level',
-                  hintText: 'Select developer level',
-                ),
+              RelativeFormField(
+                value: _controller.developerLevelLabel,
+                list: _controller.developerLevels,
+                onTap: _controller.onTapDeveloperLevel,
+                label: 'Developer level',
+                hint: 'Select developer level',
               ),
               const SizedBox(
                 height: 32,

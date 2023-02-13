@@ -25,8 +25,6 @@ class AppTheme {
         ),
         inputDecorationTheme: InputDecorationTheme(
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          filled: true,
-          fillColor: Colors.white,
           labelStyle:
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
             Color color = AppColors.secondaryColor;
