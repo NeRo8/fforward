@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:fforward_adm/admin/questions/questions_detail/view/question_detail_args.dart';
 import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
+import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_developer_levels_service.dart';
 import 'package:fforward_adm/services/fb_question_service.dart';
 import 'package:fforward_adm/services/fb_technology_service.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +27,7 @@ class QuestionDetailController extends GetxController {
   final RxString developerLevelId = ''.obs;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  final RxMap<String, Url> urls = RxMap();
+  final RxMap<String, Url> urls = RxMap({});
 
   QuestionDetailController({
     questionService,
@@ -76,14 +80,31 @@ class QuestionDetailController extends GetxController {
     developerLevelId.value = devLevId;
   }
 
-  void onCreateUrl(Url value) => urls[value.url] = value;
+  List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
+
+  void onCreateUrl(String url, String title) =>
+      urls[url] = Url(url: url, title: title);
 
   void onRemoveUrl(String url) => urls.remove(url);
 
   void onTapSubmit() async {
     try {
-      if (questionFormKey.currentState!.validate()) {}
+      if (questionFormKey.currentState!.validate()) {
+        final DatabaseReference questionRef = _questionService.table.push();
+        questionRef.set(
+          Question(
+            id: questionRef.key,
+            title: titleController.text,
+            description: descriptionController.text,
+            technologyId: technologyId.value,
+            developerLevelId: developerLevelId.value,
+            urls: urls,
+          ).toJson(),
+        );
+        Get.back();
+      }
     } catch (e) {
+      print(e);
       Get.snackbar("Error", "Error with creating question");
     }
   }

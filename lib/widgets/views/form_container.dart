@@ -27,6 +27,9 @@ class FormContainer extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 16,
+              ),
               ElevatedButton(
                 onPressed: onTapSubmit,
                 child: const Text(AppStrings.submit),

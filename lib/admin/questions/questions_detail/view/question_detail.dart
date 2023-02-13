@@ -67,7 +67,7 @@ class QuestionDetail extends StatelessWidget {
                 height: 32,
               ),
               _UrlsContainer(
-                urls: _controller.urls,
+                urls: _controller.urlsList,
                 onCreateUrl: _controller.onCreateUrl,
                 onRemoveUrl: _controller.onRemoveUrl,
               ),
@@ -81,8 +81,8 @@ class QuestionDetail extends StatelessWidget {
 }
 
 class _UrlsContainer extends StatefulWidget {
-  final Map<String, dynamic> urls;
-  final Function(Url) onCreateUrl;
+  final List<Url> urls;
+  final Function(String, String) onCreateUrl;
   final Function(String) onRemoveUrl;
 
   const _UrlsContainer({
@@ -100,37 +100,118 @@ class _UrlsContainerState extends State<_UrlsContainer> {
   final TextEditingController titleController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-        decoration:
-            BoxDecoration(border: Border.all(color: AppColors.borderColor)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+  Widget build(BuildContext context) => Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextField(
-                controller: urlController,
-                decoration: const InputDecoration(labelText: 'Url'),
+              const Text(
+                'Resources:',
+                style: TextStyle(color: AppColors.secondaryColor),
               ),
-              const SizedBox(
-                height: 32,
-              ),
-              TextField(
-                controller: titleController,
-                decoration: const InputDecoration(labelText: "Title"),
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              SizedBox(
-                width: 100,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Add url'),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: InkWell(
+                  onTap: () => Get.bottomSheet(
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: AppColors.borderColor, width: 2)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Create url',
+                                  style:
+                                      Theme.of(context).textTheme.headlineSmall,
+                                ),
+                                SizedBox(
+                                  width: 100,
+                                  child: ElevatedButton(
+                                    onPressed: () => widget.onCreateUrl(
+                                        urlController.text,
+                                        titleController.text),
+                                    child: const Text('Add url'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            TextField(
+                              controller: urlController,
+                              decoration: const InputDecoration(
+                                  labelText: 'Url', hintText: "Enter url"),
+                            ),
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            TextField(
+                              controller: titleController,
+                              decoration: const InputDecoration(
+                                labelText: "Title",
+                                hintText: "Enter title",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    backgroundColor: Colors.white,
+                  ).then((value) =>
+                      {urlController.text = '', titleController.text = ''}),
+                  child: const Icon(Icons.add_circle),
                 ),
-              )
+              ),
             ],
           ),
-        ),
+          const SizedBox(
+            height: 8,
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: widget.urls.length,
+            itemBuilder: (ctx, index) => Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 1, color: AppColors.borderColor)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(widget.urls[index].title),
+                          InkWell(
+                            onTap: () =>
+                                widget.onRemoveUrl(widget.urls[index].url),
+                            child: const Icon(
+                              Icons.remove_circle,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                ]),
+          ),
+          const SizedBox(
+            height: 32,
+          ),
+        ],
       );
 }

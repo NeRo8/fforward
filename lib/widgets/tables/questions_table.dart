@@ -26,7 +26,7 @@ class QuestionsTable extends StatelessWidget {
             CVerticalDivider(),
             CTableCell(flex: 4, title: "Description"),
             CVerticalDivider(),
-            CTableCell(flex: 4, title: "Links"),
+            CTableCell(flex: 3, title: "Links"),
           ],
         ),
         Expanded(
@@ -34,19 +34,20 @@ class QuestionsTable extends StatelessWidget {
             query: _controller.questionTable,
             itemBuilder: (context, snapshot) {
               final Map question = (snapshot.value as Map);
+
               return CTableRow(
                 children: [
                   CTableCell(flex: 2, title: question['id']),
                   const CVerticalDivider(),
                   CTableCell(flex: 3, title: question['technology_id']),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: question['developer_id']),
+                  CTableCell(flex: 3, title: question['developer_level_id']),
                   const CVerticalDivider(),
                   CTableCell(flex: 4, title: question['title']),
                   const CVerticalDivider(),
                   CTableCell(flex: 4, title: question['description']),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: question['urls']),
+                  CTableCell(flex: 3, title: question['urls'] ?? ""),
                 ],
               );
             },

@@ -15,9 +15,13 @@ abstract class ListItem {
 }
 
 class Url {
-  final String? id;
   final String url;
   final String title;
 
-  const Url({this.id, required this.url, required this.title});
+  const Url({required this.url, required this.title});
+
+  Map<String, dynamic> toJson() => {
+        'url': url,
+        'title': title,
+      };
 }
