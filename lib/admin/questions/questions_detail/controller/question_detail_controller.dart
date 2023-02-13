@@ -5,11 +5,14 @@ import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
-
   final QuestionDetailArgs? _args;
 
   final GlobalKey<FormState> questionFormKey = GlobalKey<FormState>();
-  final TextEditingController technologyId = TextEditingController();
+
+  final RxString technologyId = ''.obs;
+  final RxString developerLevelId = ''.obs;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   QuestionDetailController({
     questionService,
@@ -20,6 +23,12 @@ class QuestionDetailController extends GetxController {
   void onTapSubmit() async {
     try {
       if (questionFormKey.currentState!.validate()) {}
-    } catch (e) {}
+    } catch (e) {
+      Get.snackbar("Error", "Error with creating question");
+    }
+  }
+
+  void onTapTechnology(String techId) {
+    technologyId.value = techId;
   }
 }
