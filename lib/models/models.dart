@@ -1,4 +1,4 @@
-abstract class ListItem {
+class ListItem {
   final String id;
   final String title;
 
