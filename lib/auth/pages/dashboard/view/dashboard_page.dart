@@ -1,7 +1,7 @@
-import 'package:fforward_adm/admin/developer_levels/developer_levels_list/view/developer_levels_list.dart';
-import 'package:fforward_adm/admin/questions/questions_list/view/questions_list.dart';
-import 'package:fforward_adm/admin/technologies/technology_list/view/technology_list.dart';
-import 'package:fforward_adm/admin/users/users_list/view/users_list.dart';
+import 'package:fforward_adm/admin/pages/developer_levels/developer_levels_list/view/developer_levels_list.dart';
+import 'package:fforward_adm/admin/pages/questions/questions_list/view/questions_list.dart';
+import 'package:fforward_adm/admin/pages/technologies/technology_list/view/technology_list.dart';
+import 'package:fforward_adm/admin/pages/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_controllers.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
