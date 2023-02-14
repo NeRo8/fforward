@@ -1,4 +1,5 @@
 import 'package:fforward_adm/admin/pages/questions/questions_list/controller/questions_list_controller.dart';
+import 'package:fforward_adm/widgets/tables/url_table_field.dart';
 import 'package:fforward_adm/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class QuestionsTable extends StatelessWidget {
                   const CVerticalDivider(),
                   CTableCell(flex: 4, title: question['description']),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: question['urls'] ?? ""),
+                  UrlTableField(urls: question['urls']),
                 ],
               );
             },
