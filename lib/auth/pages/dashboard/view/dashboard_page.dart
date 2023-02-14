@@ -1,5 +1,6 @@
 import 'package:fforward_adm/admin/pages/developer_levels/developer_levels_list/view/developer_levels_list.dart';
 import 'package:fforward_adm/admin/pages/questions/questions_list/view/questions_list.dart';
+import 'package:fforward_adm/admin/pages/review/review_list/view/review_list.dart';
 import 'package:fforward_adm/admin/pages/technologies/technology_list/view/technology_list.dart';
 import 'package:fforward_adm/admin/pages/users/users_list/view/users_list.dart';
 import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_controllers.dart';
@@ -46,6 +47,10 @@ class DashboardPage extends StatelessWidget {
             CommonButton(
               title: AppStrings.questions,
               onTap: () => Get.toNamed(QuestionsList.routeName),
+            ),
+            CommonButton(
+              title: 'Review',
+              onTap: () => Get.toNamed(ReviewList.routeName),
             ),
           ],
         ),

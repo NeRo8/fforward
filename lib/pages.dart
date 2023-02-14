@@ -6,6 +6,10 @@ import 'package:fforward_adm/admin/pages/questions/questions_detail/controller/q
 import 'package:fforward_adm/admin/pages/questions/questions_detail/view/question_detail.dart';
 import 'package:fforward_adm/admin/pages/questions/questions_list/controller/questions_list_bindings.dart';
 import 'package:fforward_adm/admin/pages/questions/questions_list/view/questions_list.dart';
+import 'package:fforward_adm/admin/pages/review/review_detail/controller/review_detail_bindings.dart';
+import 'package:fforward_adm/admin/pages/review/review_detail/view/review_detail.dart';
+import 'package:fforward_adm/admin/pages/review/review_list/controller/review_list_bindings.dart';
+import 'package:fforward_adm/admin/pages/review/review_list/view/review_list.dart';
 import 'package:fforward_adm/admin/pages/technologies/technology_detail/controller/technology_detail_bindings.dart';
 import 'package:fforward_adm/admin/pages/technologies/technology_detail/view/technology_detail.dart';
 import 'package:fforward_adm/admin/pages/technologies/technology_list/controller/technology_list_bindings.dart';
@@ -77,6 +81,16 @@ class GetPages {
           name: QuestionDetail.routeName,
           page: QuestionDetail.new,
           binding: QuestionDetailBindings(),
+        ),
+        GetPage(
+          name: ReviewList.routeName,
+          page: ReviewList.new,
+          binding: ReviewListBindings(),
+        ),
+        GetPage(
+          name: ReviewDetail.routeName,
+          page: ReviewDetail.new,
+          binding: ReviewDetailBindings(),
         ),
       ];
 }
