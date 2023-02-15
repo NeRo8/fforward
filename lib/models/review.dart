@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 class Review {
-  final String id;
+  final String? id;
   final String dateStart;
   final String dateEnd;
   final String developerId;
@@ -8,7 +10,7 @@ class Review {
   final String? status;
 
   Review({
-    required this.id,
+    this.id,
     required this.dateStart,
     required this.dateEnd,
     required this.developerId,
@@ -31,8 +33,8 @@ class Review {
         'date_start': dateStart,
         'date_end': dateEnd,
         'developer_id': developerId,
-        'reviewers': reviewers,
-        'technologies': technologies,
+        'reviewers': json.encode(reviewers),
+        'technologies': json.encode(technologies),
         'status': status
       };
 }

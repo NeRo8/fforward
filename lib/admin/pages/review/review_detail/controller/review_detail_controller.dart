@@ -141,7 +141,16 @@ class ReviewDetailController extends GetxController {
 
   void onTapSubmit() async {
     try {
-      if (reviewForm.currentState!.validate()) {}
+      if (reviewForm.currentState!.validate()) {
+        _reviewService.createReview(
+          endDate.toString(),
+          startDate.toString(),
+          technologiesId,
+          reviewers,
+          developerId.value,
+          status.value,
+        );
+      }
     } catch (e) {
       print(e);
     }
