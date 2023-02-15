@@ -127,17 +127,18 @@ class ReviewDetailController extends GetxController {
   void onTapSubmit() async {
     try {
       if (reviewForm.currentState!.validate()) {
-        // _reviewService.createReview(
-        //   endDate.toString(),
-        //   startDate.toString(),
-        //   technologiesId,
-        //   reviewersId,
-        //   developerId.value,
-        //   status.value,
-        // );
+        _reviewService.createReview(
+          endDate.toString(),
+          startDate.toString(),
+          technologiesId,
+          reviewersId,
+          developerId.value,
+          status.value,
+        );
+        Get.back();
       }
     } catch (e) {
-      print(e);
+      Get.snackbar("Error", "Error with creating review");
     }
   }
 }

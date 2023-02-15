@@ -1,4 +1,6 @@
 import 'package:fforward_adm/admin/pages/review/review_list/controller/review_list_controller.dart';
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
+import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,11 @@ import 'package:get/get.dart';
 
 class ReviewTable extends StatelessWidget {
   final ReviewListController _controller = Get.find<ReviewListController>();
+
+  final UsersStoreController usersStoreController =
+      Get.find<UsersStoreController>();
+  final TechnologiesStoreController technologiesStoreController =
+      Get.find<TechnologiesStoreController>();
 
   ReviewTable({super.key});
 
@@ -56,11 +63,23 @@ class ReviewTable extends StatelessWidget {
                     title: _controller.getStatusLabel(review['status']),
                   ),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: review['developer_id']),
+                  CTableCell(
+                    flex: 3,
+                    title: usersStoreController
+                        .getFullname(review['developer_id']),
+                  ),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: review['reviewers']),
+                  CTableCell(
+                    flex: 3,
+                    title: usersStoreController
+                        .getReviewersName(review['reviewers']),
+                  ),
                   const CVerticalDivider(),
-                  CTableCell(flex: 3, title: review['technologies']),
+                  CTableCell(
+                    flex: 3,
+                    title: technologiesStoreController
+                        .getTechnologiesName(review['technologies']),
+                  ),
                 ],
               );
             },
