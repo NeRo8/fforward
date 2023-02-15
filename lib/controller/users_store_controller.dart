@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/users.dart';
 import 'package:fforward_adm/services/fb_users_service.dart';
 
@@ -30,21 +31,10 @@ class UsersStoreController extends GetxController {
 
   Users? getUserById(String id) => usersStore.value[id];
 
-  String getFullname(String? id) {
-    if (id == null) return '';
-
-    final user = usersStore.value[id];
-
-    if (user != null) {
-      return "${user.firstname} ${user.lastname}";
-    }
-
-    return '';
-  }
-
-  String getFullnameFromUser(Users user) {
-    return "${user.firstname} ${user.lastname}";
-  }
+  List<ListItem> get specialists => usersStore.value.entries
+      .map((e) => ListItem(
+          id: e.value.uid, title: "${e.value.firstname} ${e.value.lastname}"))
+      .toList();
 
   String getReviewersName(String ids) {
     final List<dynamic> users = json.decode(ids);
@@ -52,7 +42,7 @@ class UsersStoreController extends GetxController {
     return users.fold<String>('', (previousValue, userId) {
       final value = usersStore.value[userId];
       if (value != null) {
-        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${getFullnameFromUser(value)}";
+        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${value.fullname}";
       }
       return previousValue;
     });

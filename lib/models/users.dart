@@ -32,4 +32,6 @@ class Users {
         'email': email,
         'permission': permission,
       };
+
+  String get fullname => "$firstname $lastname";
 }

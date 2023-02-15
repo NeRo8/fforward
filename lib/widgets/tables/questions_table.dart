@@ -42,8 +42,8 @@ class QuestionsTable extends StatelessWidget {
           child: FirebaseDatabaseListView(
             query: _controller.questionTable,
             itemBuilder: (context, snapshot) {
-              final Map data = (snapshot.value as Map);
-              final Question question = Question.fromJson(data);
+              final Question question =
+                  Question.fromJson((snapshot.value as Map));
 
               return CTableRow(
                 children: [

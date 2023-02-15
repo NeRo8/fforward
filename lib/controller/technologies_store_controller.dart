@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_technology_service.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
 class TechnologiesStoreController extends GetxController {
@@ -28,6 +27,9 @@ class TechnologiesStoreController extends GetxController {
   }
 
   Technology? getTechnologyById(String id) => technologyStore.value[id];
+
+  List<Technology> get technologies =>
+      technologyStore.value.entries.map((e) => e.value).toList();
 
   String getTechnologyName(String? id) {
     if (id == null) return '';

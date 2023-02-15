@@ -1,4 +1,6 @@
 import 'package:fforward_adm/admin/pages/questions/questions_detail/view/question_detail_args.dart';
+import 'package:fforward_adm/controller/developer_levels_store_controller.dart';
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/question.dart';
@@ -12,15 +14,13 @@ import 'package:get/get.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
-  final FBTechnologyService _technologyService;
-  final FBDeveloperLevelsService _developerLevelsService;
+  final TechnologiesStoreController _technologiesStoreController;
+  final DeveloperLevelsStoreController _developerLevelsStoreController;
   final QuestionDetailArgs? _args;
 
-  //collection data
-  final RxList<Technology> technologies = <Technology>[].obs;
-  final RxList<DeveloperLevel> developerLevels = <DeveloperLevel>[].obs;
   //Form fields
   final GlobalKey<FormState> questionFormKey = GlobalKey<FormState>();
+
   final Rx<Technology?> technology = Rx(null);
   final Rx<DeveloperLevel?> developerLevel = Rx(null);
   final TextEditingController titleController = TextEditingController();
@@ -29,34 +29,13 @@ class QuestionDetailController extends GetxController {
 
   QuestionDetailController({
     questionService,
-    technologyService,
-    developerLevelsService,
+    technologiesStoreController,
+    developerLevelsStoreController,
     args,
   })  : _questionService = questionService,
-        _technologyService = technologyService,
-        _developerLevelsService = developerLevelsService,
+        _technologiesStoreController = technologiesStoreController,
+        _developerLevelsStoreController = developerLevelsStoreController,
         _args = args;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    _technologyService.table.get().then((snapshot) {
-      final Map data = snapshot.value as Map;
-
-      for (var technology in data.values) {
-        technologies.add(Technology.fromJson(technology));
-      }
-    });
-
-    _developerLevelsService.table.get().then((snapshot) {
-      final Map data = snapshot.value as Map;
-
-      for (var developerLevel in data.values) {
-        developerLevels.add(DeveloperLevel.fromJson(developerLevel));
-      }
-    });
-  }
 
   void onTapTechnology(Technology value) {
     technology.value = value;
@@ -66,6 +45,10 @@ class QuestionDetailController extends GetxController {
     developerLevel.value = devLevel;
   }
 
+  List<Technology> get technologies =>
+      _technologiesStoreController.technologies;
+  List<DeveloperLevel> get developerLevels =>
+      _developerLevelsStoreController.developerLevels;
   List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
 
   void onCreateUrl(String url, String title) =>

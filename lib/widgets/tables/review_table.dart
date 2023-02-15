@@ -1,6 +1,7 @@
 import 'package:fforward_adm/admin/pages/review/review_list/controller/review_list_controller.dart';
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/controller/users_store_controller.dart';
+import 'package:fforward_adm/models/review.dart';
 import 'package:fforward_adm/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -42,46 +43,46 @@ class ReviewTable extends StatelessWidget {
           child: FirebaseDatabaseListView(
             query: _controller.reviewTable,
             itemBuilder: (context, snapshot) {
-              final Map review = (snapshot.value as Map);
+              final Review review = Review.fromJson((snapshot.value as Map));
 
-              return CTableRow(
-                children: [
-                  CTableCell(flex: 1, title: review['id']),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 1,
-                    title: _controller.getDateLabel(review['date_start']),
-                  ),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 1,
-                    title: _controller.getDateLabel(review['date_end']),
-                  ),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 1,
-                    title: _controller.getStatusLabel(review['status']),
-                  ),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 3,
-                    title: usersStoreController
-                        .getFullname(review['developer_id']),
-                  ),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 3,
-                    title: usersStoreController
-                        .getReviewersName(review['reviewers']),
-                  ),
-                  const CVerticalDivider(),
-                  CTableCell(
-                    flex: 3,
-                    title: technologiesStoreController
-                        .getTechnologiesName(review['technologies']),
-                  ),
-                ],
-              );
+              return SizedBox();
+              // return CTableRow(
+              //   children: [
+              //     CTableCell(flex: 1, title: review.id!),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 1,
+              //       title: _controller.getDateLabel(review.dateStart),
+              //     ),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 1,
+              //       title: _controller.getDateLabel(review.dateEnd),
+              //     ),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 1,
+              //       title: _controller.getStatusLabel(review.status!),
+              //     ),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 3,
+              //       title: review['developer_id'],
+              //     ),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 3,
+              //       title: usersStoreController
+              //           .getReviewersName(review['reviewers']),
+              //     ),
+              //     const CVerticalDivider(),
+              //     CTableCell(
+              //       flex: 3,
+              //       title: technologiesStoreController
+              //           .getTechnologiesName(review['technologies']),
+              //     ),
+              //   ],
+              // );
             },
           ),
         ),
