@@ -20,11 +20,7 @@ class ReviewDetailController extends GetxController {
   final RxList<Technology> technologies = <Technology>[].obs;
   final RxList<DeveloperLevel> developerLevels = <DeveloperLevel>[].obs;
   final RxList<ListItem> users = <ListItem>[].obs;
-  final RxList<ListItem> statuses = <ListItem>[
-    const ListItem(id: "0", title: "Pending"),
-    const ListItem(id: "1", title: "In Progress"),
-    const ListItem(id: "2", title: "Complete"),
-  ].obs;
+  final RxList<ListItem> statuses = reviewStatus.obs;
   //
   final TextEditingController startDateController = TextEditingController();
   final Rx<DateTime?> startDate = Rx(null);

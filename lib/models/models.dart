@@ -25,3 +25,9 @@ class Url {
         'title': title,
       };
 }
+
+const reviewStatus = <ListItem>[
+  ListItem(id: "0", title: "Pending"),
+  ListItem(id: "1", title: "In Progress"),
+  ListItem(id: "2", title: "Complete"),
+];

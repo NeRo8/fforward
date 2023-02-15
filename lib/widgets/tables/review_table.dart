@@ -36,15 +36,25 @@ class ReviewTable extends StatelessWidget {
             query: _controller.reviewTable,
             itemBuilder: (context, snapshot) {
               final Map review = (snapshot.value as Map);
+
               return CTableRow(
                 children: [
                   CTableCell(flex: 1, title: review['id']),
                   const CVerticalDivider(),
-                  CTableCell(flex: 1, title: review['date_start']),
+                  CTableCell(
+                    flex: 1,
+                    title: _controller.getDateLabel(review['date_start']),
+                  ),
                   const CVerticalDivider(),
-                  CTableCell(flex: 1, title: review['date_end']),
+                  CTableCell(
+                    flex: 1,
+                    title: _controller.getDateLabel(review['date_end']),
+                  ),
                   const CVerticalDivider(),
-                  CTableCell(flex: 1, title: review['status']),
+                  CTableCell(
+                    flex: 1,
+                    title: _controller.getStatusLabel(review['status']),
+                  ),
                   const CVerticalDivider(),
                   CTableCell(flex: 3, title: review['developer_id']),
                   const CVerticalDivider(),

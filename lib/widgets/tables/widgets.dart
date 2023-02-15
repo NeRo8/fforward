@@ -35,7 +35,7 @@ class CTableCell extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
         flex: flex,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: title.isEmpty
               ? const Text(
                   'None',
