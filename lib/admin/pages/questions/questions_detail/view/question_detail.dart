@@ -1,5 +1,7 @@
 import 'package:fforward_adm/admin/pages/questions/questions_detail/controller/question_detail_controller.dart';
+import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
+import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
@@ -25,8 +27,8 @@ class QuestionDetail extends StatelessWidget {
             formKey: _controller.questionFormKey,
             onTapSubmit: _controller.onTapSubmit,
             children: [
-              RelativeFormField(
-                value: _controller.technologyLabel,
+              RelativeFormField<Technology>(
+                value: _controller.technology.value,
                 list: _controller.technologies,
                 onTap: _controller.onTapTechnology,
                 hint: 'Select technology',
@@ -35,8 +37,8 @@ class QuestionDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              RelativeFormField(
-                value: _controller.developerLevelLabel,
+              RelativeFormField<DeveloperLevel>(
+                value: _controller.developerLevel.value,
                 list: _controller.developerLevels,
                 onTap: _controller.onTapDeveloperLevel,
                 label: 'Developer level',

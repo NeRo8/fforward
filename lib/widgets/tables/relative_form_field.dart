@@ -2,10 +2,10 @@ import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class RelativeFormField extends StatefulWidget {
-  final String value;
-  final List<ListItem> list;
-  final Function(String) onTap;
+class RelativeFormField<T extends ListItem> extends StatefulWidget {
+  final T? value;
+  final List<T> list;
+  final void Function(T) onTap;
   final String label;
   final String hint;
   final String? Function(String?)? validator;
@@ -21,14 +21,15 @@ class RelativeFormField extends StatefulWidget {
     required this.label,
     required this.hint,
   }) {
-    textController.text = value;
+    textController.text = value?.title ?? '';
   }
 
   @override
-  State<RelativeFormField> createState() => _RelativeFormFieldState();
+  State<RelativeFormField<T>> createState() => _RelativeFormFieldState<T>();
 }
 
-class _RelativeFormFieldState extends State<RelativeFormField> {
+class _RelativeFormFieldState<T extends ListItem>
+    extends State<RelativeFormField<T>> {
   bool _isTechListVisible = false;
 
   @override
@@ -77,14 +78,14 @@ class _RelativeFormFieldState extends State<RelativeFormField> {
                       InkWell(
                         onTap: () {
                           _setTechListVisible(false);
-                          widget.onTap(item.id);
+                          widget.onTap(item);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: Text(item.title),
                         ),
                       ),
-                      if (item.title == widget.value)
+                      if (item.title == widget.value?.title)
                         const Divider(
                           thickness: 2,
                           color: AppColors.primaryColor,

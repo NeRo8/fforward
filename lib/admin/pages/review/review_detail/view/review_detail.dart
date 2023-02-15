@@ -45,15 +45,15 @@ class ReviewDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              RelativeFormField(
-                value: _controller.userLabel,
-                onTap: _controller.onTapUser,
-                list: _controller.users,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
-                label: "Specialist",
-                hint: 'Select specialist',
-              ),
+              // RelativeFormField(
+              //   value: _controller.userLabel,
+              //   onTap: _controller.onTapUser,
+              //   list: _controller.users,
+              //   validator: (value) =>
+              //       (value == null || value.isEmpty) ? 'Required field' : null,
+              //   label: "Specialist",
+              //   hint: 'Select specialist',
+              // ),
               const SizedBox(
                 height: 32,
               ),
@@ -85,13 +85,13 @@ class ReviewDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              RelativeFormField(
-                value: _controller.statusLabel,
-                onTap: _controller.onTapStatus,
-                list: _controller.statuses,
-                label: "Status",
-                hint: 'Select status',
-              ),
+              // RelativeFormField(
+              //   value: _controller.statusLabel,
+              //   onTap: _controller.onTapStatus,
+              //   list: _controller.statuses,
+              //   label: "Status",
+              //   hint: 'Select status',
+              // ),
             ],
           ),
         ),

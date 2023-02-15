@@ -20,6 +20,10 @@ class Url {
 
   const Url({required this.url, required this.title});
 
+  Url.fromJson(Map<dynamic, dynamic> json)
+      : url = json['url'],
+        title = json['title'];
+
   Map<String, dynamic> toJson() => {
         'url': url,
         'title': title,

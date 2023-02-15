@@ -21,8 +21,8 @@ class QuestionDetailController extends GetxController {
   final RxList<DeveloperLevel> developerLevels = <DeveloperLevel>[].obs;
   //Form fields
   final GlobalKey<FormState> questionFormKey = GlobalKey<FormState>();
-  final RxString technologyId = ''.obs;
-  final RxString developerLevelId = ''.obs;
+  final Rx<Technology?> technology = Rx(null);
+  final Rx<DeveloperLevel?> developerLevel = Rx(null);
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final RxMap<String, Url> urls = RxMap({});
@@ -58,24 +58,12 @@ class QuestionDetailController extends GetxController {
     });
   }
 
-  String get technologyLabel =>
-      technologies
-          .firstWhereOrNull((tech) => tech.id == technologyId.value)
-          ?.title ??
-      "";
-
-  void onTapTechnology(String techId) {
-    technologyId.value = techId;
+  void onTapTechnology(Technology value) {
+    technology.value = value;
   }
 
-  String get developerLevelLabel =>
-      developerLevels
-          .firstWhereOrNull((tech) => tech.id == developerLevelId.value)
-          ?.title ??
-      "";
-
-  void onTapDeveloperLevel(String devLevId) {
-    developerLevelId.value = devLevId;
+  void onTapDeveloperLevel(DeveloperLevel devLevel) {
+    developerLevel.value = devLevel;
   }
 
   List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
@@ -89,16 +77,17 @@ class QuestionDetailController extends GetxController {
     try {
       if (questionFormKey.currentState!.validate()) {
         final DatabaseReference questionRef = _questionService.table.push();
-        questionRef.set(
-          Question(
-            id: questionRef.key,
-            title: titleController.text,
-            description: descriptionController.text,
-            technologyId: technologyId.value,
-            developerLevelId: developerLevelId.value,
-            urls: urls,
-          ).toJson(),
-        );
+
+        final q = Question(
+          id: questionRef.key,
+          title: titleController.text,
+          description: descriptionController.text,
+          technology: technology.value!,
+          developerLevel: developerLevel.value!,
+          urls: urls,
+        ).toJson();
+
+        questionRef.set(q);
         Get.back();
       }
     } catch (e) {
