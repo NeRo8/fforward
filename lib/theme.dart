@@ -42,6 +42,7 @@ class AppTheme {
 
             return TextStyle(color: color, letterSpacing: 1.3);
           }),
+          errorStyle: const TextStyle(color: AppColors.errorColor),
           floatingLabelStyle:
               MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
             Color color = AppColors.secondaryColor;

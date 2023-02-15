@@ -20,14 +20,21 @@ class ReviewDetailController extends GetxController {
   final RxList<Technology> technologies = <Technology>[].obs;
   final RxList<DeveloperLevel> developerLevels = <DeveloperLevel>[].obs;
   final RxList<ListItem> users = <ListItem>[].obs;
+  final RxList<ListItem> statuses = <ListItem>[
+    const ListItem(id: "0", title: "Pending"),
+    const ListItem(id: "1", title: "In Progress"),
+    const ListItem(id: "2", title: "Complete"),
+  ].obs;
   //
   final TextEditingController startDateController = TextEditingController();
   final Rx<DateTime?> startDate = Rx(null);
   final TextEditingController endDateController = TextEditingController();
   final Rx<DateTime?> endDate = Rx(null);
 
-  final RxString technologyId = ''.obs;
+  final RxList<String> technologiesId = <String>[].obs;
   final RxString developerId = ''.obs;
+  final RxList<String> reviewers = <String>[].obs;
+  final RxString status = '0'.obs;
 
   ReviewDetailController({
     reviewService,
@@ -62,16 +69,6 @@ class ReviewDetailController extends GetxController {
     super.onInit();
   }
 
-  String get technologyLabel =>
-      technologies
-          .firstWhereOrNull((tech) => tech.id == technologyId.value)
-          ?.title ??
-      "";
-
-  void onTapTechnology(String id) {
-    technologyId.value = id;
-  }
-
   String get userLabel =>
       users.firstWhereOrNull((i) => i.id == developerId.value)?.title ?? "";
 
@@ -94,5 +91,59 @@ class ReviewDetailController extends GetxController {
         value != null ? DateFormat.yMMMMd().format(value) : '';
   }
 
-  void onTapSubmit() async {}
+  String get reviewersLabel {
+    return reviewers.fold<String>('', (value, currentUserId) {
+      final user = users.firstWhereOrNull((user) => user.id == currentUserId);
+      if (user != null) {
+        return "$value${value.isNotEmpty ? ', ' : ''}${user.title}";
+      }
+
+      return value;
+    });
+  }
+
+  void onTapReviewers(String id) {
+    final isUserSelected =
+        reviewers.firstWhereOrNull((element) => element == id);
+    if (isUserSelected == null) {
+      reviewers.add(id);
+    } else {
+      reviewers.removeWhere((element) => element == id);
+    }
+  }
+
+  String get technologiesLabel {
+    return technologiesId.fold<String>('', (value, currentTechnologyId) {
+      final technology = technologies
+          .firstWhereOrNull((tech) => tech.id == currentTechnologyId);
+      if (technology != null) {
+        return "$value${value.isNotEmpty ? ', ' : ''}${technology.title}";
+      }
+
+      return value;
+    });
+  }
+
+  void onTapTechnology(String id) {
+    final isTechnologySelected =
+        technologiesId.firstWhereOrNull((element) => element == id);
+    if (isTechnologySelected == null) {
+      technologiesId.add(id);
+    } else {
+      technologiesId.removeWhere((element) => element == id);
+    }
+  }
+
+  String get statusLabel =>
+      statuses.firstWhereOrNull((i) => i.id == status.value)?.title ?? "";
+
+  void onTapStatus(String value) => status.value = value;
+
+  void onTapSubmit() async {
+    try {
+      if (reviewForm.currentState!.validate()) {}
+    } catch (e) {
+      print(e);
+    }
+  }
 }

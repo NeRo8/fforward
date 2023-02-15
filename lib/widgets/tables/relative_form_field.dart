@@ -8,11 +8,13 @@ class RelativeFormField extends StatefulWidget {
   final Function(String) onTap;
   final String label;
   final String hint;
+  final String? Function(String?)? validator;
 
   final TextEditingController textController = TextEditingController();
 
   RelativeFormField({
     super.key,
+    this.validator,
     required this.value,
     required this.onTap,
     required this.list,
@@ -48,6 +50,7 @@ class _RelativeFormFieldState extends State<RelativeFormField> {
           child: TextFormField(
             enabled: false,
             controller: widget.textController,
+            validator: widget.validator,
             decoration: InputDecoration(
               labelText: widget.label,
               hintText: widget.hint,

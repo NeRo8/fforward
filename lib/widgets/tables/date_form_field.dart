@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class DateFormField extends StatelessWidget {
   final TextEditingController controller;
   final DateTime? startDate;
   final Function(DateTime?) onTap;
+  final String? Function(String? value)? validator;
   final String label;
   final String hint;
 
   const DateFormField({
     super.key,
     required this.controller,
+    this.validator,
     this.startDate,
     required this.onTap,
     required this.label,
@@ -37,6 +38,7 @@ class DateFormField extends StatelessWidget {
       child: TextFormField(
         enabled: false,
         controller: controller,
+        validator: validator,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
