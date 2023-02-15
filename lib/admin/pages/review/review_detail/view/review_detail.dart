@@ -58,11 +58,15 @@ class ReviewDetail extends StatelessWidget {
                 height: 32,
               ),
               MultipleRelativeFormField(
-                value: _controller.reviewersLabel,
+                values: _controller.reviewersId,
                 onTap: _controller.onTapReviewers,
                 list: _controller.users,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: (value) => (value == null || value.isEmpty)
+                    ? 'Required field'
+                    : _controller.reviewersId
+                            .contains(_controller.developerId.value)
+                        ? "Specialist can't be reviewer"
+                        : null,
                 label: "Reviewers",
                 hint: "Select reviewers",
               ),
@@ -70,7 +74,7 @@ class ReviewDetail extends StatelessWidget {
                 height: 32,
               ),
               MultipleRelativeFormField(
-                value: _controller.technologiesLabel,
+                values: _controller.technologiesId,
                 onTap: _controller.onTapTechnology,
                 list: _controller.technologies,
                 validator: (value) =>

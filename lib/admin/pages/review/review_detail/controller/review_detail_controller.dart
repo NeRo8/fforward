@@ -33,7 +33,7 @@ class ReviewDetailController extends GetxController {
 
   final RxList<String> technologiesId = <String>[].obs;
   final RxString developerId = ''.obs;
-  final RxList<String> reviewers = <String>[].obs;
+  final RxList<String> reviewersId = <String>[].obs;
   final RxString status = '0'.obs;
 
   ReviewDetailController({
@@ -91,24 +91,13 @@ class ReviewDetailController extends GetxController {
         value != null ? DateFormat.yMMMMd().format(value) : '';
   }
 
-  String get reviewersLabel {
-    return reviewers.fold<String>('', (value, currentUserId) {
-      final user = users.firstWhereOrNull((user) => user.id == currentUserId);
-      if (user != null) {
-        return "$value${value.isNotEmpty ? ', ' : ''}${user.title}";
-      }
-
-      return value;
-    });
-  }
-
   void onTapReviewers(String id) {
     final isUserSelected =
-        reviewers.firstWhereOrNull((element) => element == id);
+        reviewersId.firstWhereOrNull((element) => element == id);
     if (isUserSelected == null) {
-      reviewers.add(id);
+      reviewersId.add(id);
     } else {
-      reviewers.removeWhere((element) => element == id);
+      reviewersId.removeWhere((element) => element == id);
     }
   }
 
@@ -142,14 +131,14 @@ class ReviewDetailController extends GetxController {
   void onTapSubmit() async {
     try {
       if (reviewForm.currentState!.validate()) {
-        _reviewService.createReview(
-          endDate.toString(),
-          startDate.toString(),
-          technologiesId,
-          reviewers,
-          developerId.value,
-          status.value,
-        );
+        // _reviewService.createReview(
+        //   endDate.toString(),
+        //   startDate.toString(),
+        //   technologiesId,
+        //   reviewersId,
+        //   developerId.value,
+        //   status.value,
+        // );
       }
     } catch (e) {
       print(e);

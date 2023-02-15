@@ -1,9 +1,10 @@
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MultipleRelativeFormField extends StatefulWidget {
-  final String value;
+  final List<String> values;
   final List<ListItem> list;
   final Function(String) onTap;
   final String label;
@@ -15,13 +16,19 @@ class MultipleRelativeFormField extends StatefulWidget {
   MultipleRelativeFormField({
     super.key,
     this.validator,
-    required this.value,
+    required this.values,
     required this.onTap,
     required this.list,
     required this.label,
     required this.hint,
   }) {
-    textController.text = value;
+    textController.text = list.fold<String>('', (previousValue, element) {
+      final value = values.firstWhereOrNull((e) => e == element.id);
+      if (value != null) {
+        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${element.title}";
+      }
+      return previousValue;
+    });
   }
 
   @override
@@ -98,7 +105,7 @@ class _MultipleRelativeFormFieldState extends State<MultipleRelativeFormField> {
                               child: Text(item.title),
                             ),
                           ),
-                          if (widget.value.contains(item.title))
+                          if (widget.values.contains(item.id))
                             const Divider(
                               thickness: 2,
                               color: AppColors.primaryColor,
