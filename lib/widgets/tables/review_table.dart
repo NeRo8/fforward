@@ -45,44 +45,41 @@ class ReviewTable extends StatelessWidget {
             itemBuilder: (context, snapshot) {
               final Review review = Review.fromJson((snapshot.value as Map));
 
-              return SizedBox();
-              // return CTableRow(
-              //   children: [
-              //     CTableCell(flex: 1, title: review.id!),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 1,
-              //       title: _controller.getDateLabel(review.dateStart),
-              //     ),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 1,
-              //       title: _controller.getDateLabel(review.dateEnd),
-              //     ),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 1,
-              //       title: _controller.getStatusLabel(review.status!),
-              //     ),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 3,
-              //       title: review['developer_id'],
-              //     ),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 3,
-              //       title: usersStoreController
-              //           .getReviewersName(review['reviewers']),
-              //     ),
-              //     const CVerticalDivider(),
-              //     CTableCell(
-              //       flex: 3,
-              //       title: technologiesStoreController
-              //           .getTechnologiesName(review['technologies']),
-              //     ),
-              //   ],
-              // );
+              return CTableRow(
+                children: [
+                  CTableCell(flex: 1, title: review.id!),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 1,
+                    title: _controller.getDateLabel(review.dateStart),
+                  ),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 1,
+                    title: _controller.getDateLabel(review.dateEnd),
+                  ),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 1,
+                    title: review.status?.title,
+                  ),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 3,
+                    title: review.specialist.title,
+                  ),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 3,
+                    title: review.getReviewers,
+                  ),
+                  const CVerticalDivider(),
+                  CTableCell(
+                    flex: 3,
+                    title: review.getTechnologies,
+                  ),
+                ],
+              );
             },
           ),
         ),

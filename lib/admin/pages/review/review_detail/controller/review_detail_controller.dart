@@ -1,9 +1,10 @@
-import 'package:fforward_adm/models/developer_level.dart';
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
+import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/models/models.dart';
+import 'package:fforward_adm/models/review.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_review_service.dart';
-import 'package:fforward_adm/services/fb_technology_service.dart';
-import 'package:fforward_adm/services/fb_users_service.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,66 +12,38 @@ import 'package:intl/intl.dart';
 
 class ReviewDetailController extends GetxController {
   final FBReviewService _reviewService;
-  final FBTechnologyService _technologyService;
-  final FBUsersService _usersService;
+  final TechnologiesStoreController _technologiesStoreController;
+  final UsersStoreController _usersStoreController;
 
   final GlobalKey<FormState> reviewForm = GlobalKey<FormState>();
 
-  //collection data
-  final RxList<Technology> technologies = <Technology>[].obs;
-  final RxList<DeveloperLevel> developerLevels = <DeveloperLevel>[].obs;
-  final RxList<ListItem> users = <ListItem>[].obs;
+  final Rx<ListItem?> selectedStatus = Rx(reviewStatus[0]);
   final RxList<ListItem> statuses = reviewStatus.obs;
-  //
-  final TextEditingController startDateController = TextEditingController();
-  final Rx<DateTime?> startDate = Rx(null);
-  final TextEditingController endDateController = TextEditingController();
-  final Rx<DateTime?> endDate = Rx(null);
 
-  final RxList<String> technologiesId = <String>[].obs;
-  final RxString developerId = ''.obs;
-  final RxList<String> reviewersId = <String>[].obs;
-  final RxString status = '0'.obs;
+  final Rx<DateTime?> startDate = Rx(null);
+  final TextEditingController startDateController = TextEditingController();
+
+  final Rx<DateTime?> endDate = Rx(null);
+  final TextEditingController endDateController = TextEditingController();
+
+  final RxList<Technology> selectedTechnologies = <Technology>[].obs;
+  List<Technology> get technologies =>
+      _technologiesStoreController.technologies;
+
+  final Rx<ListItem?> selectedSpecialist = Rx(null);
+
+  final RxList<ListItem> selectedReviewers = <ListItem>[].obs;
+  List<ListItem> get specialists => _usersStoreController.specialists;
 
   ReviewDetailController({
     reviewService,
-    technologyService,
-    usersService,
+    technologiesStoreController,
+    usersStoreController,
   })  : _reviewService = reviewService,
-        _technologyService = technologyService,
-        _usersService = usersService;
+        _technologiesStoreController = technologiesStoreController,
+        _usersStoreController = usersStoreController;
 
-  @override
-  void onInit() {
-    _technologyService.table.get().then((snapshot) {
-      final Map data = snapshot.value as Map;
-
-      for (var technology in data.values) {
-        technologies.add(Technology.fromJson(technology));
-      }
-    });
-
-    _usersService.table.get().then((snapshot) {
-      final Map data = snapshot.value as Map;
-
-      for (var user in data.values) {
-        users.add(
-          ListItem(
-              id: user['uid'],
-              title: user['firstname'] + " " + user['lastname']),
-        );
-      }
-    });
-
-    super.onInit();
-  }
-
-  String get userLabel =>
-      users.firstWhereOrNull((i) => i.id == developerId.value)?.title ?? "";
-
-  void onTapUser(String id) {
-    developerId.value = id;
-  }
+  List<ListItem> get getSelectedReviewers => selectedReviewers;
 
   void onTapStartDate(DateTime? value) {
     startDate.value = value;
@@ -87,54 +60,48 @@ class ReviewDetailController extends GetxController {
         value != null ? DateFormat.yMMMMd().format(value) : '';
   }
 
-  void onTapReviewers(String id) {
+  void onTapSpecialist(ListItem value) {
+    selectedSpecialist.value = value;
+  }
+
+  void onTapReviewers(ListItem value) {
     final isUserSelected =
-        reviewersId.firstWhereOrNull((element) => element == id);
+        selectedReviewers.firstWhereOrNull((element) => element.id == value.id);
+
     if (isUserSelected == null) {
-      reviewersId.add(id);
+      selectedReviewers.add(value);
     } else {
-      reviewersId.removeWhere((element) => element == id);
+      selectedReviewers.removeWhere((element) => element.id == value.id);
     }
   }
 
-  String get technologiesLabel {
-    return technologiesId.fold<String>('', (value, currentTechnologyId) {
-      final technology = technologies
-          .firstWhereOrNull((tech) => tech.id == currentTechnologyId);
-      if (technology != null) {
-        return "$value${value.isNotEmpty ? ', ' : ''}${technology.title}";
-      }
-
-      return value;
-    });
-  }
-
-  void onTapTechnology(String id) {
-    final isTechnologySelected =
-        technologiesId.firstWhereOrNull((element) => element == id);
+  void onTapTechnology(Technology value) {
+    final isTechnologySelected = selectedTechnologies
+        .firstWhereOrNull((element) => element.id == value.id);
     if (isTechnologySelected == null) {
-      technologiesId.add(id);
+      selectedTechnologies.add(value);
     } else {
-      technologiesId.removeWhere((element) => element == id);
+      selectedTechnologies.removeWhere((element) => element.id == value.id);
     }
   }
 
-  String get statusLabel =>
-      statuses.firstWhereOrNull((i) => i.id == status.value)?.title ?? "";
-
-  void onTapStatus(String value) => status.value = value;
+  void onTapStatus(ListItem value) => selectedStatus.value = value;
 
   void onTapSubmit() async {
     try {
       if (reviewForm.currentState!.validate()) {
-        _reviewService.createReview(
-          endDate.toString(),
-          startDate.toString(),
-          technologiesId,
-          reviewersId,
-          developerId.value,
-          status.value,
-        );
+        final DatabaseReference reviewRef = _reviewService.table.push();
+
+        reviewRef.set(Review(
+          id: reviewRef.key,
+          specialist: selectedSpecialist.value!,
+          reviewers: selectedReviewers,
+          technologies: selectedTechnologies,
+          status: selectedStatus.value,
+          dateStart: startDate.value!,
+          dateEnd: endDate.value!,
+        ).toJson());
+
         Get.back();
       }
     } catch (e) {

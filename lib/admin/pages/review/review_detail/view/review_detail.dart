@@ -1,4 +1,5 @@
 import 'package:fforward_adm/admin/pages/review/review_detail/controller/review_detail_controller.dart';
+import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/widgets/tables/date_form_field.dart';
 import 'package:fforward_adm/widgets/tables/multiple_relative_form_field.dart';
 import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
@@ -45,36 +46,32 @@ class ReviewDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              // RelativeFormField(
-              //   value: _controller.userLabel,
-              //   onTap: _controller.onTapUser,
-              //   list: _controller.users,
-              //   validator: (value) =>
-              //       (value == null || value.isEmpty) ? 'Required field' : null,
-              //   label: "Specialist",
-              //   hint: 'Select specialist',
-              // ),
+              RelativeFormField(
+                value: _controller.selectedSpecialist.value,
+                onTap: _controller.onTapSpecialist,
+                list: _controller.specialists,
+                validator: (value) =>
+                    (value == null || value.isEmpty) ? 'Required field' : null,
+                label: "Specialist",
+                hint: 'Select specialist',
+              ),
               const SizedBox(
                 height: 32,
               ),
               MultipleRelativeFormField(
-                values: _controller.reviewersId,
+                values: _controller.selectedReviewers,
                 onTap: _controller.onTapReviewers,
-                list: _controller.users,
-                validator: (value) => (value == null || value.isEmpty)
-                    ? 'Required field'
-                    : _controller.reviewersId
-                            .contains(_controller.developerId.value)
-                        ? "Specialist can't be reviewer"
-                        : null,
+                list: _controller.specialists,
+                validator: (value) =>
+                    (value == null || value.isEmpty) ? 'Required field' : null,
                 label: "Reviewers",
                 hint: "Select reviewers",
               ),
               const SizedBox(
                 height: 32,
               ),
-              MultipleRelativeFormField(
-                values: _controller.technologiesId,
+              MultipleRelativeFormField<Technology>(
+                values: _controller.selectedTechnologies,
                 onTap: _controller.onTapTechnology,
                 list: _controller.technologies,
                 validator: (value) =>
@@ -85,13 +82,13 @@ class ReviewDetail extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              // RelativeFormField(
-              //   value: _controller.statusLabel,
-              //   onTap: _controller.onTapStatus,
-              //   list: _controller.statuses,
-              //   label: "Status",
-              //   hint: 'Select status',
-              // ),
+              RelativeFormField(
+                value: _controller.selectedStatus.value,
+                onTap: _controller.onTapStatus,
+                list: _controller.statuses,
+                label: "Status",
+                hint: 'Select status',
+              ),
             ],
           ),
         ),

@@ -11,9 +11,7 @@ class ReviewListController extends GetxController {
 
   DatabaseReference get reviewTable => _reviewService.table;
 
-  String getDateLabel(String value) => DateFormat.yMMMd().format(
-        DateTime.parse(value),
-      );
+  String getDateLabel(DateTime value) => DateFormat.yMMMd().format(value);
 
   String getStatusLabel(String value) =>
       reviewStatus.firstWhereOrNull((element) => element.id == value)?.title ??

@@ -3,10 +3,10 @@ import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MultipleRelativeFormField extends StatefulWidget {
-  final List<String> values;
-  final List<ListItem> list;
-  final Function(String) onTap;
+class MultipleRelativeFormField<T extends ListItem> extends StatefulWidget {
+  final List<T> values;
+  final List<T> list;
+  final Function(T) onTap;
   final String label;
   final String hint;
   final String? Function(String?)? validator;
@@ -22,21 +22,19 @@ class MultipleRelativeFormField extends StatefulWidget {
     required this.label,
     required this.hint,
   }) {
-    textController.text = list.fold<String>('', (previousValue, element) {
-      final value = values.firstWhereOrNull((e) => e == element.id);
-      if (value != null) {
-        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${element.title}";
-      }
-      return previousValue;
-    });
+    textController.text = values.fold<String>(
+        '',
+        (previousValue, element) =>
+            "$previousValue${previousValue.isNotEmpty ? ", " : ""}${element.title}");
   }
 
   @override
-  State<MultipleRelativeFormField> createState() =>
-      _MultipleRelativeFormFieldState();
+  State<MultipleRelativeFormField<T>> createState() =>
+      _MultipleRelativeFormFieldState<T>();
 }
 
-class _MultipleRelativeFormFieldState extends State<MultipleRelativeFormField> {
+class _MultipleRelativeFormFieldState<T extends ListItem>
+    extends State<MultipleRelativeFormField<T>> {
   bool _isTechListVisible = false;
 
   @override
@@ -93,19 +91,22 @@ class _MultipleRelativeFormFieldState extends State<MultipleRelativeFormField> {
                     itemCount: widget.list.length,
                     itemBuilder: (ctx, index) {
                       final item = widget.list[index];
+                      final bool isSelected = widget.values.firstWhereOrNull(
+                              (element) => element.id == item.id) !=
+                          null;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           InkWell(
                             onTap: () {
-                              widget.onTap(item.id);
+                              widget.onTap(item);
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 8),
                               child: Text(item.title),
                             ),
                           ),
-                          if (widget.values.contains(item.id))
+                          if (isSelected)
                             const Divider(
                               thickness: 2,
                               color: AppColors.primaryColor,

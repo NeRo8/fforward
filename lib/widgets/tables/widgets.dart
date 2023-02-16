@@ -23,12 +23,12 @@ class CTableRow extends StatelessWidget {
 
 class CTableCell extends StatelessWidget {
   final int flex;
-  final String title;
+  final String? title;
 
   const CTableCell({
     super.key,
     this.flex = 1,
-    required this.title,
+    this.title,
   });
 
   @override
@@ -36,12 +36,12 @@ class CTableCell extends StatelessWidget {
         flex: flex,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: title.isEmpty
+          child: (title == null || title!.isEmpty)
               ? const Text(
                   'None',
                   style: TextStyle(color: AppColors.secondaryColor),
                 )
-              : Text(title),
+              : Text(title!),
         ),
       );
 }

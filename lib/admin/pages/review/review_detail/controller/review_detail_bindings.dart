@@ -1,3 +1,5 @@
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
+import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/services/fb_review_service.dart';
 import 'package:fforward_adm/services/fb_technology_service.dart';
 import 'package:fforward_adm/services/fb_users_service.dart';
@@ -12,15 +14,16 @@ class ReviewDetailBindings extends Bindings {
     final FirebaseDatabase fbDB = FirebaseDatabase.instance;
 
     final FBReviewService reviewService = FBReviewService(fbDB: fbDB);
-    final FBTechnologyService technologyService =
-        FBTechnologyService(fbDB: fbDB);
-    final FBUsersService usersService = FBUsersService(fbDB: fbDB);
+    final UsersStoreController usersStoreController =
+        Get.find<UsersStoreController>();
+    final TechnologiesStoreController technologiesStoreController =
+        Get.find<TechnologiesStoreController>();
 
     Get.lazyPut(
       () => ReviewDetailController(
         reviewService: reviewService,
-        technologyService: technologyService,
-        usersService: usersService,
+        technologiesStoreController: technologiesStoreController,
+        usersStoreController: usersStoreController,
       ),
     );
   }

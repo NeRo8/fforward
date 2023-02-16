@@ -21,18 +21,6 @@ class FBReviewService {
     status,
   ) async {
     DatabaseReference recordRef = table.push();
-
-    recordRef.set(
-      Review(
-        id: recordRef.key,
-        dateStart: dateStart,
-        dateEnd: dateEnd,
-        developerId: developerId,
-        reviewers: reviewers,
-        technologies: technologies,
-        status: status,
-      ).toJson(),
-    );
   }
 
   Future<void> updateReviewById(Question question) async {}
