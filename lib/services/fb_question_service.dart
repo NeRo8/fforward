@@ -23,14 +23,16 @@ class FBQuestionService {
   }) async {
     DatabaseReference recordRef = table.push();
 
-    recordRef.set(Question(
-      id: recordRef.key,
-      title: title,
-      description: description,
-      technology: technology,
-      developerLevel: developerLevel,
-      urls: urls,
-    ).toJson());
+    recordRef.set(
+      Question(
+        id: recordRef.key,
+        title: title,
+        description: description,
+        technology: technology,
+        developerLevel: developerLevel,
+        urls: urls,
+      ).toJson(),
+    );
   }
 
   Future<void> updateQuestionById(Question question) async {}

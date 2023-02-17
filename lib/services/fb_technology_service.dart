@@ -1,3 +1,4 @@
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -12,7 +13,12 @@ class FBTechnologyService {
 
   Future<void> createTechnology({required String title}) async {
     DatabaseReference recordRef = table.push();
-    recordRef.set({'id': recordRef.key, 'title': title});
+    recordRef.set(
+      ListItem(
+        id: recordRef.key ?? title.toLowerCase(),
+        title: title,
+      ).toJson(),
+    );
   }
 
   Future<void> updateTechnologyById(Technology technology) async {}

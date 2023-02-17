@@ -43,6 +43,14 @@ class ReviewDetailController extends GetxController {
         _technologiesStoreController = technologiesStoreController,
         _usersStoreController = usersStoreController;
 
+  @override
+  onClose() {
+    startDateController.dispose();
+    endDateController.dispose();
+
+    super.onClose();
+  }
+
   List<ListItem> get getSelectedReviewers => selectedReviewers;
 
   void onTapStartDate(DateTime? value) {
@@ -60,9 +68,7 @@ class ReviewDetailController extends GetxController {
         value != null ? DateFormat.yMMMMd().format(value) : '';
   }
 
-  void onTapSpecialist(ListItem value) {
-    selectedSpecialist.value = value;
-  }
+  void onTapSpecialist(ListItem value) => selectedSpecialist.value = value;
 
   void onTapReviewers(ListItem value) {
     final isUserSelected =

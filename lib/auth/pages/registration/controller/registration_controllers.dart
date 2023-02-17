@@ -43,13 +43,11 @@ class RegistrationController extends GetxController {
 
       if (response.user != null) {
         await _usersService.createUser(
-          Users(
-            uid: response.user!.uid,
-            firstname: firstnameController.text,
-            lastname: lastnameController.text,
-            email: emailController.text,
-            permission: UsersPermission.worker,
-          ),
+          uid: response.user!.uid,
+          firstname: firstnameController.text,
+          lastname: lastnameController.text,
+          email: emailController.text,
+          permission: UsersPermission.worker,
         );
       }
     } on FirebaseAuthException catch (err) {

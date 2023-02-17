@@ -9,8 +9,24 @@ class FBUsersService {
 
   DatabaseReference get table => _fbDB.ref(tableName);
 
-  Future<void> createUser(Users user) async {
-    _fbDB.ref("${tableName}/${user.uid}").set(user.toJson());
+  Future<void> createUser({
+    required String uid,
+    required String lastname,
+    required String firstname,
+    required String email,
+    required String permission,
+  }) async {
+    final DatabaseReference userRef = _fbDB.ref("${tableName}/${uid}");
+
+    userRef.set(
+      Users(
+        uid: uid,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        permission: permission,
+      ).toJson(),
+    );
   }
 
   Future<void> updateUserById(Users user) async {}
