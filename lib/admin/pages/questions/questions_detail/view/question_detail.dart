@@ -59,6 +59,7 @@ class QuestionDetail extends StatelessWidget {
               ),
               TextFormField(
                 maxLines: 20,
+                controller: _controller.descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Description',
                   hintText: 'Enter description',

@@ -1,4 +1,5 @@
-import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'models.dart';
 
@@ -25,31 +26,43 @@ class Review {
       : id = json['id'],
         dateStart = DateTime.parse(json['date_start']),
         dateEnd = DateTime.parse(json['date_end']),
-        specialist = ListItem.fromJson(jsonDecode(json['specialist'])),
-        reviewers = (jsonDecode(json['reviewers']) as List<dynamic>)
-            .map<ListItem>((item) => ListItem.fromJson(item))
+        specialist = ListItem.fromJson(json['specialist']),
+        reviewers = json['reviewers']
+            .values
+            .map<ListItem>((e) => ListItem.fromJson(e))
             .toList(),
-        technologies = (jsonDecode(json['technologies']) as List<dynamic>)
-            .map<ListItem>((item) => ListItem.fromJson(item))
+        technologies = json['technologies']
+            .values
+            .map<ListItem>((e) => ListItem.fromJson(e))
             .toList(),
-        status = ListItem.fromJson(jsonDecode(json['status']));
+        status = ListItem.fromJson(json['status']);
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'date_start': dateStart.toString(),
         'date_end': dateEnd.toString(),
-        'specialist': json.encode(specialist),
-        'reviewers': json.encode(reviewers),
-        'technologies': json.encode(technologies),
-        'status': json.encode(status)
+        'specialist': specialist.toJson(),
+        'reviewers': {for (var e in reviewers) e.id: e.toJson()},
+        'technologies': {for (var e in technologies) e.id: e.toJson()},
+        'status': status?.toJson(),
       };
 
-  String get getReviewers => reviewers.fold<String>(
+  String formatDate(DateTime value) => DateFormat.yMMMd().format(value);
+
+  String get getStartDateLabel => formatDate(dateStart);
+
+  String get getEndDateLabel => formatDate(dateEnd);
+
+  String getStatusLabel(String value) =>
+      reviewStatus.firstWhereOrNull((element) => element.id == value)?.title ??
+      "";
+
+  String get getReviewersLabel => reviewers.fold<String>(
       '',
       (previousValue, currentValue) =>
           "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${currentValue.title}");
 
-  String get getTechnologies => technologies.fold<String>(
+  String get getTechnologiesLabel => technologies.fold<String>(
       '',
       (previousValue, currentValue) =>
           "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${currentValue.title}");

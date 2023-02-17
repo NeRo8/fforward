@@ -57,7 +57,7 @@ class QuestionsTable extends StatelessWidget {
                   const CVerticalDivider(),
                   CTableCell(flex: 4, title: question.description),
                   const CVerticalDivider(),
-                  UrlTableField(urls: question.urls),
+                  UrlTableField(urls: question.getUrls),
                 ],
               );
             },

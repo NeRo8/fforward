@@ -90,18 +90,14 @@ class ReviewDetailController extends GetxController {
   void onTapSubmit() async {
     try {
       if (reviewForm.currentState!.validate()) {
-        final DatabaseReference reviewRef = _reviewService.table.push();
-
-        reviewRef.set(Review(
-          id: reviewRef.key,
-          specialist: selectedSpecialist.value!,
-          reviewers: selectedReviewers,
-          technologies: selectedTechnologies,
-          status: selectedStatus.value,
-          dateStart: startDate.value!,
+        await _reviewService.createReview(
           dateEnd: endDate.value!,
-        ).toJson());
-
+          dateStart: startDate.value!,
+          technologies: selectedTechnologies,
+          reviewers: selectedReviewers,
+          specialist: selectedSpecialist.value!,
+          status: selectedStatus.value!,
+        );
         Get.back();
       }
     } catch (e) {

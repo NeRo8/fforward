@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:fforward_adm/models/developer_level.dart';
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 
 class Question {
@@ -9,7 +8,7 @@ class Question {
   final String description;
   final Technology technology;
   final DeveloperLevel developerLevel;
-  final Map<String, dynamic>? urls;
+  final Map<String, Url>? urls;
 
   const Question({
     this.id,
@@ -20,13 +19,17 @@ class Question {
     this.urls,
   });
 
+  List<Url>? get getUrls => urls?.values.toList() ?? [];
+
   Question.fromJson(Map<dynamic, dynamic> j)
       : id = j['id'],
         title = j['title'],
         description = j['description'],
         technology = Technology.fromJson(j['technology']),
         developerLevel = DeveloperLevel.fromJson(j['developer_level']),
-        urls = json.decode(j['urls']);
+        urls = j['urls'] != null
+            ? {for (var e in j['urls'].entries) e.key: Url.fromJson(e.value)}
+            : null;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -34,6 +37,8 @@ class Question {
         'description': description,
         'technology': technology.toJson(),
         'developer_level': developerLevel.toJson(),
-        'urls': json.encode(urls),
+        'urls': (urls != null)
+            ? {for (var e in urls!.values) e.url: e.toJson()}
+            : null
       };
 }

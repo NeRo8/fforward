@@ -1,8 +1,9 @@
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UrlTableField extends StatelessWidget {
-  final Map<String, dynamic>? urls;
+  final List<Url>? urls;
 
   const UrlTableField({super.key, required this.urls});
 
@@ -15,12 +16,16 @@ class UrlTableField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...urls!.values
-                  .map((v) =>
-                      TextButton(onPressed: () {}, child: Text(v['title'])))
+              ...urls!
+                  .map(
+                    (e) => TextButton(
+                      onPressed: () {},
+                      child: Text(e.title),
+                    ),
+                  )
                   .toList()
-                  .sublist(0, urls!.values.length > 2 ? 2 : urls!.length),
-              if (urls!.values.isEmpty)
+                  .sublist(0, urls!.length > 2 ? 2 : urls!.length),
+              if (urls!.isEmpty)
                 const Text(
                   'None',
                   style: TextStyle(color: AppColors.secondaryColor),

@@ -3,12 +3,8 @@ import 'package:fforward_adm/controller/developer_levels_store_controller.dart';
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
-import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/models/technology.dart';
-import 'package:fforward_adm/services/fb_developer_levels_service.dart';
 import 'package:fforward_adm/services/fb_question_service.dart';
-import 'package:fforward_adm/services/fb_technology_service.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,6 +33,13 @@ class QuestionDetailController extends GetxController {
         _developerLevelsStoreController = developerLevelsStoreController,
         _args = args;
 
+  @override
+  void onClose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.onClose();
+  }
+
   void onTapTechnology(Technology value) {
     technology.value = value;
   }
@@ -59,18 +62,14 @@ class QuestionDetailController extends GetxController {
   void onTapSubmit() async {
     try {
       if (questionFormKey.currentState!.validate()) {
-        final DatabaseReference questionRef = _questionService.table.push();
-
-        final q = Question(
-          id: questionRef.key,
+        await _questionService.createQuestion(
           title: titleController.text,
           description: descriptionController.text,
           technology: technology.value!,
           developerLevel: developerLevel.value!,
           urls: urls,
-        ).toJson();
+        );
 
-        questionRef.set(q);
         Get.back();
       }
     } catch (e) {

@@ -51,12 +51,12 @@ class ReviewTable extends StatelessWidget {
                   const CVerticalDivider(),
                   CTableCell(
                     flex: 1,
-                    title: _controller.getDateLabel(review.dateStart),
+                    title: review.getStartDateLabel,
                   ),
                   const CVerticalDivider(),
                   CTableCell(
                     flex: 1,
-                    title: _controller.getDateLabel(review.dateEnd),
+                    title: review.getEndDateLabel,
                   ),
                   const CVerticalDivider(),
                   CTableCell(
@@ -71,12 +71,12 @@ class ReviewTable extends StatelessWidget {
                   const CVerticalDivider(),
                   CTableCell(
                     flex: 3,
-                    title: review.getReviewers,
+                    title: review.getReviewersLabel,
                   ),
                   const CVerticalDivider(),
                   CTableCell(
                     flex: 3,
-                    title: review.getTechnologies,
+                    title: review.getTechnologiesLabel,
                   ),
                 ],
               );
