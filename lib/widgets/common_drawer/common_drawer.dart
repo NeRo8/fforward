@@ -3,7 +3,7 @@ import 'package:fforward_adm/admin/pages/questions/questions_list/view/questions
 import 'package:fforward_adm/admin/pages/review/review_list/view/review_list.dart';
 import 'package:fforward_adm/admin/pages/technologies/technology_list/view/technology_list.dart';
 import 'package:fforward_adm/admin/pages/users/users_list/view/users_list.dart';
-import 'package:fforward_adm/auth/pages/dashboard/view/dashboard_page.dart';
+import 'package:fforward_adm/client/pages/dashboard/view/dashboard_page.dart';
 import 'package:fforward_adm/controller/current_user_controller.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';

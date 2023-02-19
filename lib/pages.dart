@@ -16,8 +16,8 @@ import 'package:fforward_adm/admin/pages/technologies/technology_list/controller
 import 'package:fforward_adm/admin/pages/technologies/technology_list/view/technology_list.dart';
 import 'package:fforward_adm/admin/pages/users/users_list/controller/user_list_bindings.dart';
 import 'package:fforward_adm/admin/pages/users/users_list/view/users_list.dart';
-import 'package:fforward_adm/auth/pages/dashboard/controller/dashboard_bindings.dart';
-import 'package:fforward_adm/auth/pages/dashboard/view/dashboard_page.dart';
+import 'package:fforward_adm/client/pages/dashboard/controller/dashboard_bindings.dart';
+import 'package:fforward_adm/client/pages/dashboard/view/dashboard_page.dart';
 import 'package:fforward_adm/auth/pages/login/controller/login_bindings.dart';
 import 'package:fforward_adm/auth/pages/login/view/login_page.dart';
 import 'package:fforward_adm/auth/pages/registration/controller/registration_bindings.dart';

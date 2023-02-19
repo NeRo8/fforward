@@ -1,4 +1,4 @@
-import 'package:fforward_adm/auth/pages/dashboard/view/dashboard_page.dart';
+import 'package:fforward_adm/client/pages/dashboard/view/dashboard_page.dart';
 import 'package:fforward_adm/auth/pages/login/view/login_page.dart';
 import 'package:fforward_adm/controller/current_user_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';

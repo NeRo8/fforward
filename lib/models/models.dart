@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ListItem {
   final String id;
   final String title;
@@ -30,8 +32,48 @@ class Url {
       };
 }
 
-const reviewStatus = <ListItem>[
-  ListItem(id: "0", title: "Pending"),
-  ListItem(id: "1", title: "In Progress"),
-  ListItem(id: "2", title: "Complete"),
+class ReviewStatuses {
+  static const pending = 'pending';
+  static const missed = 'missed';
+  static const complete = 'completed';
+  static const inProgress = 'in_progress';
+}
+
+class ReviewStatus extends ListItem {
+  final Color color;
+
+  const ReviewStatus({
+    required super.id,
+    required super.title,
+    required this.color,
+  });
+}
+
+const Map<String, ReviewStatus> reviewStatuses = {
+  ReviewStatuses.pending: ReviewStatus(
+    id: ReviewStatuses.pending,
+    title: "Pending",
+    color: Colors.yellow,
+  ),
+  ReviewStatuses.inProgress: ReviewStatus(
+      id: ReviewStatuses.inProgress,
+      title: "In Progress",
+      color: Colors.greenAccent),
+  ReviewStatuses.complete: ReviewStatus(
+    id: ReviewStatuses.complete,
+    title: "Complete",
+    color: Colors.green,
+  ),
+  ReviewStatuses.missed: ReviewStatus(
+    id: ReviewStatuses.missed,
+    title: "Missed",
+    color: Colors.red,
+  ),
+};
+
+const List<ListItem> reviewStatus = <ListItem>[
+  ListItem(id: "pending", title: "Pending"),
+  ListItem(id: "in_progress", title: "In Progress"),
+  ListItem(id: "complete", title: "Complete"),
+  ListItem(id: "missed", title: "Missed"),
 ];
