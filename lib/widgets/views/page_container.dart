@@ -5,16 +5,19 @@ class PageContainer extends StatelessWidget {
   final String headerTitle;
   final List<Widget>? headerActions;
   final Widget child;
+  final Widget? drawer;
 
   const PageContainer({
     super.key,
     required this.headerTitle,
     this.headerActions,
     required this.child,
+    this.drawer,
   });
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        drawer: drawer,
         appBar: AppBar(
           title: Text(headerTitle),
           actions: headerActions,

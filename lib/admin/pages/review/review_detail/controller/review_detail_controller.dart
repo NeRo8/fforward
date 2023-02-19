@@ -1,10 +1,8 @@
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/models/models.dart';
-import 'package:fforward_adm/models/review.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_review_service.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
