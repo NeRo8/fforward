@@ -34,6 +34,7 @@ class LoginController extends GetxController {
         "Error",
         err.message ?? err.code,
         snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(16),
       );
     }
   }

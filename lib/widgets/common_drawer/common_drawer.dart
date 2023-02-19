@@ -17,11 +17,11 @@ class CommonDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Obx(
-              () => DrawerHeader(
+        child: Obx(
+          () => ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
                 decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
                 ),
@@ -36,32 +36,32 @@ class CommonDrawer extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            ListTile(
-              title: const Text('Dashboard'),
-              onTap: () => Get.toNamed(DashboardPage.routeName),
-            ),
-            if (currentUserController.getCurrentUserIsAdmin) ...adminPages(),
-            const Divider(
-              thickness: 2,
-              color: AppColors.borderColor,
-            ),
-            ListTile(
-              trailing: const Icon(
-                Icons.logout,
-                color: Colors.red,
+              ListTile(
+                title: const Text('Dashboard'),
+                onTap: () => Get.toNamed(DashboardPage.routeName),
               ),
-              title: const Text(
-                'Logout',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+              if (currentUserController.getCurrentUserIsAdmin) ...adminPages(),
+              const Divider(
+                thickness: 2,
+                color: AppColors.borderColor,
+              ),
+              ListTile(
+                trailing: const Icon(
+                  Icons.logout,
                   color: Colors.red,
-                  fontSize: 14,
                 ),
+                title: const Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                    fontSize: 14,
+                  ),
+                ),
+                onTap: currentUserController.onTapLogout,
               ),
-              onTap: currentUserController.onTapLogout,
-            ),
-          ],
+            ],
+          ),
         ),
       );
 }

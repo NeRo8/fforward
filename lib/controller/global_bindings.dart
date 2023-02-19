@@ -9,16 +9,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 class GlobalBindings extends Bindings {
   @override
   void dependencies() {
-    final FirebaseAuth fbAuthService = FirebaseAuth.instance;
-    final FBUsersService fbUsersService =
-        FBUsersService(fbDB: FirebaseDatabase.instance);
+    final CurrentUserController currentUserController = CurrentUserController(
+      authService: FirebaseAuth.instance,
+      usersService: FBUsersService(fbDB: FirebaseDatabase.instance),
+    );
 
+    Get.put(currentUserController);
     Get.put(
-      CurrentUserController(
-        authService: fbAuthService,
-        usersService: fbUsersService,
+      GlobalController(
+        fbAuthService: FirebaseAuth.instance,
+        currentUserController: currentUserController,
       ),
     );
-    Get.put(GlobalController(fbAuthService: fbAuthService));
   }
 }

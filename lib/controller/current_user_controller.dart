@@ -13,19 +13,23 @@ class CurrentUserController extends GetxController {
       : _authService = authService,
         _usersService = usersService;
 
-  @override
-  void onReady() {
-    super.onReady();
-
-    _usersService.getUserById(_authService.currentUser!.uid).then((snapshot) {
-      final Map data = snapshot.value as Map;
-
-      currentUser.value = Users.fromJson(data);
-    });
-  }
-
   bool get getCurrentUserIsAdmin => currentUser.value?.isAdmin ?? false;
   String get getCurrentUserFullname => currentUser.value?.fullname ?? "None";
+
+  Future<void> updateCurrentUser(String? uid) async {
+    try {
+      if (uid != null) {
+        final Map data = await _usersService.getUserById(uid).then((snapshot) {
+          return snapshot.value as Map;
+        });
+        currentUser.value = Users.fromJson(data);
+      } else {
+        currentUser.value = null;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void onTapLogout() async {
     try {
