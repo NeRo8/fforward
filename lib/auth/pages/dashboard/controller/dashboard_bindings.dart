@@ -28,6 +28,6 @@ class DashboardBindings extends Bindings {
     Get.put(TechnologiesStoreController(service: technologyService));
     Get.put(DeveloperLevelsStoreController(service: developerLevelsService));
 
-    Get.lazyPut(() => DashboardController(authService: authService));
+    Get.lazyPut(() => DashboardController());
   }
 }

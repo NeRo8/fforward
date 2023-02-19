@@ -13,8 +13,12 @@ class GlobalBindings extends Bindings {
     final FBUsersService fbUsersService =
         FBUsersService(fbDB: FirebaseDatabase.instance);
 
-    Get.put(CurrentUserController(
-        authService: fbAuthService, usersService: fbUsersService));
+    Get.put(
+      CurrentUserController(
+        authService: fbAuthService,
+        usersService: fbUsersService,
+      ),
+    );
     Get.put(GlobalController(fbAuthService: fbAuthService));
   }
 }

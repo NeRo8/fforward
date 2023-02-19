@@ -34,4 +34,6 @@ class Users {
       };
 
   String get fullname => "$firstname $lastname";
+
+  bool get isAdmin => permission == UsersPermission.admin;
 }

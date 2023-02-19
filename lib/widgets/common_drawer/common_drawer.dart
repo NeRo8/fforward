@@ -28,10 +28,11 @@ class CommonDrawer extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    currentUserController.currentUser.value?.fullname ?? "None",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          color: Colors.white,
-                        ),
+                    currentUserController.getCurrentUserFullname,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -40,58 +41,78 @@ class CommonDrawer extends StatelessWidget {
               title: const Text('Dashboard'),
               onTap: () => Get.toNamed(DashboardPage.routeName),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 8, right: 8, top: 32, bottom: 4),
-              child: Text(
-                'Catalogs',
-                style: TextStyle(color: AppColors.primaryColor),
+            if (currentUserController.getCurrentUserIsAdmin) ...adminPages(),
+            const Divider(
+              thickness: 2,
+              color: AppColors.borderColor,
+            ),
+            ListTile(
+              trailing: const Icon(
+                Icons.logout,
+                color: Colors.red,
               ),
-            ),
-            const Divider(
-              thickness: 2,
-              color: AppColors.borderColor,
-            ),
-            ListTile(
-              title: const Text('Reviews'),
-              onTap: () => Get.toNamed(ReviewList.routeName),
-            ),
-            ListTile(
-              title: const Text('Users'),
-              onTap: () => Get.toNamed(UsersListPage.routeName),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 8, right: 8, top: 32, bottom: 4),
-              child: Text(
-                'System tables',
-                style: TextStyle(color: AppColors.primaryColor),
+              title: const Text(
+                'Logout',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 14,
+                ),
               ),
-            ),
-            const Divider(
-              thickness: 2,
-              color: AppColors.borderColor,
-            ),
-            ListTile(
-              title: const Text('Question'),
-              onTap: () => Get.toNamed(QuestionsList.routeName),
-            ),
-            ListTile(
-              title: const Text('Technologies'),
-              onTap: () => Get.toNamed(TechnologyList.routeName),
-            ),
-            ListTile(
-              title: const Text('Developer levels'),
-              onTap: () => Get.toNamed(DeveloperLevelsList.routeName),
-            ),
-            const Divider(
-              thickness: 2,
-              color: AppColors.borderColor,
-            ),
-            ListTile(
-              title: const Text('Logout'),
-              onTap: () => {},
-              textColor: AppColors.primaryColor,
+              onTap: currentUserController.onTapLogout,
             ),
           ],
         ),
       );
 }
+
+List<Widget> adminPages() => [
+      const Padding(
+        padding: EdgeInsets.only(left: 8, right: 8, top: 32, bottom: 4),
+        child: Text(
+          'Catalogs',
+          style: TextStyle(
+            color: AppColors.primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      const Divider(
+        thickness: 2,
+        color: AppColors.borderColor,
+      ),
+      ListTile(
+        title: const Text('Reviews'),
+        onTap: () => Get.toNamed(ReviewList.routeName),
+      ),
+      ListTile(
+        title: const Text('Users'),
+        onTap: () => Get.toNamed(UsersListPage.routeName),
+      ),
+      const Padding(
+        padding: EdgeInsets.only(left: 8, right: 8, top: 32, bottom: 4),
+        child: Text(
+          'System tables',
+          style: TextStyle(
+            color: AppColors.primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      const Divider(
+        thickness: 2,
+        color: AppColors.borderColor,
+      ),
+      ListTile(
+        title: const Text('Question'),
+        onTap: () => Get.toNamed(QuestionsList.routeName),
+      ),
+      ListTile(
+        title: const Text('Technologies'),
+        onTap: () => Get.toNamed(TechnologyList.routeName),
+      ),
+      ListTile(
+        title: const Text('Developer levels'),
+        onTap: () => Get.toNamed(DeveloperLevelsList.routeName),
+      ),
+    ];
