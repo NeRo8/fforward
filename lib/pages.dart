@@ -23,6 +23,8 @@ import 'package:fforward_adm/auth/pages/login/view/login_page.dart';
 import 'package:fforward_adm/auth/pages/registration/controller/registration_bindings.dart';
 import 'package:fforward_adm/auth/pages/registration/view/registration_page.dart';
 import 'package:fforward_adm/auth/pages/splash/view/splash_page.dart';
+import 'package:fforward_adm/client/pages/review_form/controller/review_form_bindings.dart';
+import 'package:fforward_adm/client/pages/review_form/view/review_form.dart';
 import 'package:get/get.dart';
 
 class GetPages {
@@ -91,6 +93,11 @@ class GetPages {
           name: ReviewDetail.routeName,
           page: ReviewDetail.new,
           binding: ReviewDetailBindings(),
+        ),
+        GetPage(
+          name: ReviewForm.routeName,
+          page: ReviewForm.new,
+          binding: ReviewFormBindings(),
         ),
       ];
 }

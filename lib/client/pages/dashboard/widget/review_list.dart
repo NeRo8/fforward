@@ -1,15 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/database.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:get/get.dart';
+
+import 'package:fforward_adm/client/pages/review_form/view/review_form.dart';
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/review.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
-import 'package:firebase_database/firebase_database.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/database.dart';
 
 class ReviewList extends StatelessWidget {
   final Query _query;
 
   const ReviewList({super.key, query}) : _query = query;
+
+  void onTap() => Get.toNamed(ReviewForm.routeName);
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -23,7 +27,7 @@ class ReviewList extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: InkWell(
-                  onTap: () => {},
+                  onTap: onTap,
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
