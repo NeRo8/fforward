@@ -1,3 +1,4 @@
+import 'package:fforward_adm/client/pages/review_form/view/review_form_args.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/database.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -13,8 +14,6 @@ class ReviewList extends StatelessWidget {
 
   const ReviewList({super.key, query}) : _query = query;
 
-  void onTap() => Get.toNamed(ReviewForm.routeName);
-
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(16),
@@ -23,6 +22,11 @@ class ReviewList extends StatelessWidget {
             itemBuilder: (context, snapshot) {
               final Review review = Review.fromJson((snapshot.value as Map));
               final currentStatus = reviewStatuses[review.status!.id];
+
+              void onTap() => Get.toNamed(
+                    ReviewForm.routeName,
+                    arguments: ReviewFormArgs(review: review),
+                  );
 
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -68,7 +72,6 @@ class _InfoBlock extends StatelessWidget {
   final Review review;
 
   const _InfoBlock({
-    super.key,
     required this.review,
   });
 
