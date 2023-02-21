@@ -53,12 +53,13 @@ const Map<String, ReviewStatus> reviewStatuses = {
   ReviewStatuses.pending: ReviewStatus(
     id: ReviewStatuses.pending,
     title: "Pending",
-    color: Colors.yellow,
+    color: Colors.orange,
   ),
   ReviewStatuses.inProgress: ReviewStatus(
-      id: ReviewStatuses.inProgress,
-      title: "In Progress",
-      color: Colors.greenAccent),
+    id: ReviewStatuses.inProgress,
+    title: "In Progress",
+    color: Colors.lightBlue,
+  ),
   ReviewStatuses.complete: ReviewStatus(
     id: ReviewStatuses.complete,
     title: "Complete",
@@ -77,3 +78,26 @@ const List<ListItem> reviewStatus = <ListItem>[
   ListItem(id: "complete", title: "Complete"),
   ListItem(id: "missed", title: "Missed"),
 ];
+
+class Level {
+  final String id;
+  final String title;
+  final Color color;
+
+  const Level({
+    required this.id,
+    required this.title,
+    required this.color,
+  });
+}
+
+const notSelectedLevel =
+    Level(id: "not_selected", title: "Not selected", color: Colors.grey);
+
+const Map<String, Level> levels = {
+  "not_selected": notSelectedLevel,
+  "0": Level(id: "0", title: "Without experience", color: Colors.red),
+  "1": Level(id: "1", title: "Need improvement", color: Colors.blue),
+  "2": Level(id: "2", title: "Good knowledge", color: Colors.green),
+  "3": Level(id: "3", title: "Excellent knowledge", color: Colors.orange),
+};

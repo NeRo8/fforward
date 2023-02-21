@@ -1,13 +1,17 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:fforward_adm/admin/pages/questions/questions_detail/view/question_detail_args.dart';
+
 import 'package:fforward_adm/controller/developer_levels_store_controller.dart';
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
+
 import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
+
 import 'package:fforward_adm/services/fb_question_service.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
@@ -56,8 +60,10 @@ class QuestionDetailController extends GetxController {
   List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
 
   void onCreateUrl(String url, String title) {
-    final String uuid = const Uuid().toString();
-    urls[uuid] = Url(url: url, title: title);
+    final rnd = Random();
+    final urlId = rnd.nextInt(1000).toString();
+
+    urls[urlId] = Url(url: url, title: title);
   }
 
   void onRemoveUrl(String uuid) => urls.remove(uuid);

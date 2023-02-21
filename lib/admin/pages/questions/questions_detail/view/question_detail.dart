@@ -117,8 +117,11 @@ class _UrlsContainerState extends State<_UrlsContainer> {
                   onTap: () => Get.bottomSheet(
                     DecoratedBox(
                       decoration: BoxDecoration(
-                          border: Border.all(
-                              color: AppColors.borderColor, width: 2)),
+                        border: Border.all(
+                          color: AppColors.borderColor,
+                          width: 2,
+                        ),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(

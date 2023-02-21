@@ -10,6 +10,8 @@ class ReviewFormController extends GetxController {
 
   final RxMap<String, Question> _questions = RxMap({});
 
+  final RxMap<String, String> answers = RxMap({});
+
   ReviewFormController({review, questionService})
       : _review = review,
         _questionService = questionService;
@@ -33,4 +35,11 @@ class ReviewFormController extends GetxController {
   }
 
   List<Question> get questions => _questions.values.toList();
+
+  void onTapAnswers({
+    required String questionId,
+    required String levelId,
+  }) {
+    answers[questionId] = levelId;
+  }
 }

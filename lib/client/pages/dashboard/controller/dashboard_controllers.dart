@@ -14,6 +14,7 @@ class DashboardController extends GetxController {
       .orderByChild("specialist/id")
       .equalTo(_currentUserId);
 
-  Query get reviewsAsReviewerQuery =>
-      _reviewService.table.orderByChild("reviewers/$_currentUserId");
+  Query get reviewsAsReviewerQuery => _reviewService.table
+      .orderByChild("reviewers/$_currentUserId/id")
+      .equalTo(_currentUserId);
 }

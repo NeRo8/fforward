@@ -2,6 +2,7 @@ import 'package:fforward_adm/client/pages/review_form/controller/review_form_con
 import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/utils/urls.dart';
+import 'package:fforward_adm/widgets/pickers/level_picker/level_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,31 +18,54 @@ class ReviewForm extends StatelessWidget {
         appBar: AppBar(title: const Text('Review Form')),
         body: Obx(
           () => ListView.builder(
-            itemCount: _controller.questions.length,
-            itemBuilder: (context, index) => _QuestionItemList(
-              question: _controller.questions[index],
-            ),
-          ),
+              itemCount: _controller.questions.length,
+              itemBuilder: (context, index) {
+                final question = _controller.questions[index];
+                return Obx(
+                  () => _QuestionItemList(
+                    question: question,
+                    levelId: _controller.answers[question.id],
+                    onTapLevel: _controller.onTapAnswers,
+                  ),
+                );
+              }),
         ),
       );
 }
 
 class _QuestionItemList extends StatelessWidget {
   final Question question;
+  final String? levelId;
+  final Function({required String questionId, required String levelId})
+      onTapLevel;
 
-  const _QuestionItemList({required this.question});
+  const _QuestionItemList({
+    required this.question,
+    required this.levelId,
+    required this.onTapLevel,
+  });
+
+  void onTapItem(String levelId) => onTapLevel(
+        questionId: question.id!,
+        levelId: levelId,
+      );
 
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         child: DecoratedBox(
-            decoration: const BoxDecoration(color: Colors.white),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: AppColors.borderColor),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _InfoBlockItem(
-                      label: "Technology: ",
+                      label: "Developer level: ",
                       text: question.developerLevel.title),
                   const SizedBox(
                     height: 16,
@@ -58,45 +82,49 @@ class _QuestionItemList extends StatelessWidget {
                   ),
                   if (question.description.isNotEmpty) ...[
                     _InfoBlockItem(
-                      label: "Description:",
+                      label: "Description: ",
                       text: question.description,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
                   ],
-                  if (question.urls != null)
+                  if (question.urls != null) ...[
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Links:",
+                          "Links: ",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: question.urls!.values
-                                .map(
-                                  (e) => InkWell(
-                                    onTap: () => onTapLink(e.url),
-                                    child: Text(
-                                      e.title,
-                                      style: const TextStyle(
-                                        color: AppColors.primaryColor,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                        ...question.urls!.values
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: InkWell(
+                                  onTap: () => onTapLink(e.url),
+                                  child: Text(
+                                    e.title,
+                                    style: const TextStyle(
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                )
-                                .toList(),
-                          ),
-                        )
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                  LevelPicker(levelId: levelId, onTapLevel: onTapItem),
                 ],
               ),
-            )),
+            ),
+          ),
+        ),
       );
 }
 
