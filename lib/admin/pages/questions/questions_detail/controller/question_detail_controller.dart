@@ -7,6 +7,7 @@ import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_question_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class QuestionDetailController extends GetxController {
   final FBQuestionService _questionService;
@@ -54,10 +55,12 @@ class QuestionDetailController extends GetxController {
       _developerLevelsStoreController.developerLevels;
   List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
 
-  void onCreateUrl(String url, String title) =>
-      urls[url] = Url(url: url, title: title);
+  void onCreateUrl(String url, String title) {
+    final String uuid = const Uuid().toString();
+    urls[uuid] = Url(url: url, title: title);
+  }
 
-  void onRemoveUrl(String url) => urls.remove(url);
+  void onRemoveUrl(String uuid) => urls.remove(uuid);
 
   void onTapSubmit() async {
     try {

@@ -1,5 +1,6 @@
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
+import 'package:fforward_adm/utils/urls.dart';
 import 'package:flutter/material.dart';
 
 class UrlTableField extends StatelessWidget {
@@ -18,9 +19,15 @@ class UrlTableField extends StatelessWidget {
             children: [
               ...urls!
                   .map(
-                    (e) => TextButton(
-                      onPressed: () {},
-                      child: Text(e.title),
+                    (e) => InkWell(
+                      onTap: () => onTapLink(e.url),
+                      child: Text(
+                        e.title,
+                        style: const TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   )
                   .toList()

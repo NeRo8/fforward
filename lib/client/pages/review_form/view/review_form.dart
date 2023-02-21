@@ -1,9 +1,9 @@
 import 'package:fforward_adm/client/pages/review_form/controller/review_form_controller.dart';
 import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
+import 'package:fforward_adm/utils/urls.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ReviewForm extends StatelessWidget {
   static const routeName = '/review-form';
@@ -31,22 +31,6 @@ class _QuestionItemList extends StatelessWidget {
 
   const _QuestionItemList({required this.question});
 
-  void onTapLink(String itemUrl) async {
-    final Uri url = Uri.parse(itemUrl);
-    final canLaunch = await canLaunchUrl(url);
-
-    if (canLaunch) {
-      await launchUrl(url);
-    } else {
-      Get.snackbar(
-        "Error",
-        "Urls in no longer valid",
-        snackPosition: SnackPosition.BOTTOM,
-        margin: const EdgeInsets.all(16),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
@@ -56,9 +40,6 @@ class _QuestionItemList extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
                   _InfoBlockItem(
                       label: "Technology: ",
                       text: question.developerLevel.title),
@@ -75,11 +56,15 @@ class _QuestionItemList extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  if (question.description.isNotEmpty)
+                  if (question.description.isNotEmpty) ...[
                     _InfoBlockItem(
                       label: "Description:",
                       text: question.description,
                     ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
                   if (question.urls != null)
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,

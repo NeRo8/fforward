@@ -38,7 +38,7 @@ class Question {
         'technology': technology.toJson(),
         'developer_level': developerLevel.toJson(),
         'urls': (urls != null)
-            ? {for (var e in urls!.values) e.url: e.toJson()}
+            ? {for (var e in urls!.entries) e.key: e.value.toJson()}
             : null
       };
 }

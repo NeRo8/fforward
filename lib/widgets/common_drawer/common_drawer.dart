@@ -86,6 +86,10 @@ List<Widget> adminPages() => [
         onTap: () => Get.toNamed(ReviewList.routeName),
       ),
       ListTile(
+        title: const Text('Question'),
+        onTap: () => Get.toNamed(QuestionsList.routeName),
+      ),
+      ListTile(
         title: const Text('Users'),
         onTap: () => Get.toNamed(UsersListPage.routeName),
       ),
@@ -102,10 +106,6 @@ List<Widget> adminPages() => [
       const Divider(
         thickness: 2,
         color: AppColors.borderColor,
-      ),
-      ListTile(
-        title: const Text('Question'),
-        onTap: () => Get.toNamed(QuestionsList.routeName),
       ),
       ListTile(
         title: const Text('Technologies'),
