@@ -3,6 +3,7 @@ import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_review_service.dart';
+import 'package:fforward_adm/utils/common_snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -91,7 +92,7 @@ class ReviewDetailController extends GetxController {
 
   void onTapStatus(ListItem value) => selectedStatus.value = value;
 
-  void onTapSubmit() async {
+  void onTapSubmit({bool withContinue = false}) async {
     try {
       if (reviewForm.currentState!.validate()) {
         await _reviewService.createReview(
@@ -102,10 +103,15 @@ class ReviewDetailController extends GetxController {
           specialist: selectedSpecialist.value!,
           status: selectedStatus.value!,
         );
-        Get.back();
+
+        if (!withContinue) {
+          Get.back();
+        }
+
+        commonSnackBar.callSuccessSnackBar();
       }
     } catch (e) {
-      Get.snackbar("Error", "Error with creating review");
+      commonSnackBar.callErrorSnackBar();
     }
   }
 }

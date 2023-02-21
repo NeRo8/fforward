@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:fforward_adm/utils/common_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -68,7 +69,7 @@ class QuestionDetailController extends GetxController {
 
   void onRemoveUrl(String uuid) => urls.remove(uuid);
 
-  void onTapSubmit() async {
+  void onTapSubmit({bool withContinue = false}) async {
     try {
       if (questionFormKey.currentState!.validate()) {
         await _questionService.createQuestion(
@@ -79,10 +80,13 @@ class QuestionDetailController extends GetxController {
           urls: urls,
         );
 
-        Get.back();
+        if (!withContinue) {
+          Get.back();
+        }
+        commonSnackBar.callSuccessSnackBar();
       }
     } catch (e) {
-      Get.snackbar("Error", "Error with creating question");
+      commonSnackBar.callErrorSnackBar();
     }
   }
 }

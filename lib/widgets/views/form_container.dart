@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class FormContainer extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final VoidCallback onTapSubmit;
+  final Function({bool withContinue}) onTapSubmit;
   final List<Widget> children;
 
   const FormContainer({
@@ -19,6 +19,7 @@ class FormContainer extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 child: SingleChildScrollView(
@@ -30,9 +31,27 @@ class FormContainer extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              ElevatedButton(
-                onPressed: onTapSubmit,
-                child: const Text(AppStrings.submit),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => onTapSubmit(withContinue: true),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey,
+                      ),
+                      child: const Text(AppStrings.createAndContinue),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 32,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: onTapSubmit,
+                      child: const Text(AppStrings.create),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

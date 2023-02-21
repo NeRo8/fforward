@@ -1,5 +1,5 @@
-import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/services/fb_developer_levels_service.dart';
+import 'package:fforward_adm/utils/common_snackbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -30,19 +30,19 @@ class DeveloperLevelsDetailController extends GetxController {
     super.onClose();
   }
 
-  void onTapSubmit() async {
+  void onTapSubmit({bool withContinue = false}) async {
     if (developerLevelFormKey.currentState!.validate()) {
       try {
-        if (_id != null) {
-          //TODO: Update record
-        } else {
-          await _developerLevelsService.createDeveloperLevel(
-            title: titleController.text,
-          );
+        await _developerLevelsService.createDeveloperLevel(
+          title: titleController.text,
+        );
+
+        if (!withContinue) {
+          Get.back();
         }
-        Get.back();
+        commonSnackBar.callSuccessSnackBar();
       } on FirebaseException catch (e) {
-        Get.snackbar("Error", e.message ?? "Trouble with data saving");
+        commonSnackBar.callErrorSnackBar();
       }
     }
   }
