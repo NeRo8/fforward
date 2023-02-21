@@ -8,12 +8,29 @@ class ReviewFormController extends GetxController {
   final Review _review;
   final FBQuestionService _questionService;
 
-  final RxList<Question> questions = <Question>[].obs;
+  final RxMap<String, Question> _questions = RxMap({});
 
   ReviewFormController({review, questionService})
       : _review = review,
         _questionService = questionService;
 
-  Query get getReactQuestions =>
-      _questionService.table.orderByChild("technology/NO5NurfeC9tMunL7hBy");
+  @override
+  void onReady() {
+    super.onReady();
+
+    for (var element in _review.technologies) {
+      _questionService.table
+          .orderByChild("technology/${element.id}")
+          .once(DatabaseEventType.value)
+          .then((response) {
+        final Map data = response.snapshot.value as Map;
+
+        data.forEach((key, value) {
+          _questions[key] = Question.fromJson(value);
+        });
+      });
+    }
+  }
+
+  List<Question> get questions => _questions.values.toList();
 }
