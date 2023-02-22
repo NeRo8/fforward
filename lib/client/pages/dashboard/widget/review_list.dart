@@ -89,6 +89,11 @@ class _InfoBlock extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
+        _InfoBlockItem(
+            label: "Technologies: ", text: review.getTechnologiesLabel),
+        const SizedBox(
+          height: 8,
+        ),
         Row(children: [
           _InfoBlockItem(
             label: "Date start: ",

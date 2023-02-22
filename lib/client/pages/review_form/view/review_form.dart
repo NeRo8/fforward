@@ -60,68 +60,69 @@ class _QuestionItemList extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _InfoBlockItem(
+                    label: "Developer level: ",
+                    text: question.developerLevel.title),
+                const SizedBox(
+                  height: 16,
+                ),
+                _InfoBlockItem(
+                    label: "Technology: ", text: question.technology.title),
+                const SizedBox(
+                  height: 16,
+                ),
+                _InfoBlockItem(label: "Question title: ", text: question.title),
+                const SizedBox(
+                  height: 16,
+                ),
+                if (question.description.isNotEmpty) ...[
                   _InfoBlockItem(
-                      label: "Developer level: ",
-                      text: question.developerLevel.title),
+                    label: "Description: ",
+                    text: question.description,
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
-                  _InfoBlockItem(
-                      label: "Technology: ", text: question.technology.title),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  _InfoBlockItem(
-                      label: "Question title: ", text: question.title),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  if (question.description.isNotEmpty) ...[
-                    _InfoBlockItem(
-                      label: "Description: ",
-                      text: question.description,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
-                  if (question.urls != null) ...[
-                    Row(
-                      children: [
-                        const Text(
-                          "Links: ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        ...question.urls!.values
-                            .map(
-                              (e) => Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: InkWell(
-                                  onTap: () => onTapLink(e.url),
-                                  child: Text(
-                                    e.title,
-                                    style: const TextStyle(
-                                      color: AppColors.primaryColor,
-                                      fontWeight: FontWeight.bold,
+                ],
+                if (question.urls != null) ...[
+                  Row(
+                    children: [
+                      const Text(
+                        "Links: ",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Expanded(
+                        child: Wrap(
+                          children: question.urls!.values
+                              .map(
+                                (e) => Padding(
+                                  padding: const EdgeInsets.only(right: 8),
+                                  child: InkWell(
+                                    onTap: () => onTapLink(e.url),
+                                    child: Text(
+                                      e.title,
+                                      style: const TextStyle(
+                                        color: AppColors.primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                            .toList(),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
-                  LevelPicker(levelId: levelId, onTapLevel: onTapItem),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                 ],
-              ),
+                LevelPicker(levelId: levelId, onTapLevel: onTapItem),
+              ],
             ),
           ),
         ),

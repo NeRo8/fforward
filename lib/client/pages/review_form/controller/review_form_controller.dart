@@ -22,7 +22,8 @@ class ReviewFormController extends GetxController {
 
     for (var element in _review.technologies) {
       _questionService.table
-          .orderByChild("technology/${element.id}")
+          .orderByChild("technology/id")
+          .equalTo(element.id)
           .once(DatabaseEventType.value)
           .then((response) {
         final Map data = response.snapshot.value as Map;
