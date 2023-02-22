@@ -1,4 +1,5 @@
 import 'package:fforward_adm/client/pages/review_form/controller/review_form_controller.dart';
+import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/utils/urls.dart';
@@ -15,7 +16,24 @@ class ReviewForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Review Form')),
+        appBar: AppBar(
+          title: const Text('Review Form'),
+          actions: [
+            InkWell(
+              onTap: _controller.onTapSubmit,
+              child: const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Submit review',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 32,
+            ),
+          ],
+        ),
         body: Obx(
           () => ListView.builder(
               itemCount: _controller.questions.length,
@@ -24,7 +42,7 @@ class ReviewForm extends StatelessWidget {
                 return Obx(
                   () => _QuestionItemList(
                     question: question,
-                    levelId: _controller.answers[question.id],
+                    answer: _controller.answers[question.id],
                     onTapLevel: _controller.onTapAnswers,
                   ),
                 );
@@ -35,19 +53,19 @@ class ReviewForm extends StatelessWidget {
 
 class _QuestionItemList extends StatelessWidget {
   final Question question;
-  final String? levelId;
-  final Function({required String questionId, required String levelId})
+  final Answer? answer;
+  final Function({required String questionId, required String answerId})
       onTapLevel;
 
   const _QuestionItemList({
     required this.question,
-    required this.levelId,
+    required this.answer,
     required this.onTapLevel,
   });
 
-  void onTapItem(String levelId) => onTapLevel(
+  void onTapItem(String answerId) => onTapLevel(
         questionId: question.id!,
-        levelId: levelId,
+        answerId: answerId,
       );
 
   @override
@@ -63,17 +81,6 @@ class _QuestionItemList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _InfoBlockItem(
-                    label: "Developer level: ",
-                    text: question.developerLevel.title),
-                const SizedBox(
-                  height: 16,
-                ),
-                _InfoBlockItem(
-                    label: "Technology: ", text: question.technology.title),
-                const SizedBox(
-                  height: 16,
-                ),
                 _InfoBlockItem(label: "Question title: ", text: question.title),
                 const SizedBox(
                   height: 16,
@@ -87,6 +94,17 @@ class _QuestionItemList extends StatelessWidget {
                     height: 16,
                   ),
                 ],
+                _InfoBlockItem(
+                    label: "Developer level: ",
+                    text: question.developerLevel.title),
+                const SizedBox(
+                  height: 16,
+                ),
+                _InfoBlockItem(
+                    label: "Technology: ", text: question.technology.title),
+                const SizedBox(
+                  height: 16,
+                ),
                 if (question.urls != null) ...[
                   Row(
                     children: [
@@ -121,7 +139,7 @@ class _QuestionItemList extends StatelessWidget {
                     height: 16,
                   ),
                 ],
-                LevelPicker(levelId: levelId, onTapLevel: onTapItem),
+                LevelPicker(answerId: answer?.answerId, onTapLevel: onTapItem),
               ],
             ),
           ),

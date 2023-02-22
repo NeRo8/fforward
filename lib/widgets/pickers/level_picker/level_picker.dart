@@ -3,12 +3,12 @@ import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LevelPicker extends StatefulWidget {
-  final String? levelId;
+  final String? answerId;
   final Function(String id) onTapLevel;
 
   const LevelPicker({
     super.key,
-    this.levelId,
+    this.answerId,
     required this.onTapLevel,
   });
 
@@ -30,32 +30,35 @@ class _LevelPickerState extends State<LevelPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final currentLevel = levels[widget.levelId];
+    final currentLevel = levels[widget.answerId];
 
-    return Stack(
-      children: [
-        LevelItem(
-          title: currentLevel?.title,
-          color: currentLevel?.color,
-          onTap: onTapChangeListVisible,
-        ),
-        if (isListVisible)
-          SizedBox(
-            width: 200,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: levels.values
-                  .map(
-                    (e) => LevelItem(
-                      color: e.color,
-                      title: e.title,
-                      onTap: () => onTapSetLevel(e.id),
-                    ),
-                  )
-                  .toList(),
-            ),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Stack(
+        children: [
+          LevelItem(
+            title: currentLevel?.title,
+            color: currentLevel?.color,
+            onTap: onTapChangeListVisible,
           ),
-      ],
+          if (isListVisible)
+            SizedBox(
+              width: 200,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: levels.values
+                    .map(
+                      (e) => LevelItem(
+                        color: e.color,
+                        title: e.title,
+                        onTap: () => onTapSetLevel(e.id),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
