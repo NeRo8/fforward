@@ -50,8 +50,19 @@ class ReviewDetail extends StatelessWidget {
                 value: _controller.selectedSpecialist.value,
                 onTap: _controller.onTapSpecialist,
                 list: _controller.specialists,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Required field';
+
+                  final isContain = _controller.selectedReviewers
+                      .firstWhereOrNull((item) =>
+                          item.id == _controller.selectedSpecialist.value?.id);
+
+                  if (isContain != null) {
+                    return "Specialist can't  make self review";
+                  }
+
+                  return null;
+                },
                 label: "Specialist",
                 hint: 'Select specialist',
               ),
@@ -62,8 +73,19 @@ class ReviewDetail extends StatelessWidget {
                 values: _controller.selectedReviewers,
                 onTap: _controller.onTapReviewers,
                 list: _controller.specialists,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Required field';
+
+                  final isContain = _controller.selectedReviewers
+                      .firstWhereOrNull((item) =>
+                          item.id == _controller.selectedSpecialist.value?.id);
+
+                  if (isContain != null) {
+                    return "Specialist can't make self review";
+                  }
+
+                  return null;
+                },
                 label: "Reviewers",
                 hint: "Select reviewers",
               ),
