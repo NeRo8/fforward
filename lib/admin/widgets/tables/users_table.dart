@@ -1,5 +1,5 @@
 import 'package:fforward_adm/admin/pages/users/users_list/controller/users_list_controller.dart';
-import 'package:fforward_adm/widgets/tables/widgets.dart';
+import 'package:fforward_adm/admin/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutterfire_ui/database.dart';

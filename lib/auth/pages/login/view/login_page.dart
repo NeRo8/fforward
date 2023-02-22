@@ -1,7 +1,7 @@
 import 'package:fforward_adm/auth/pages/login/controller/login_controllers.dart';
 import 'package:fforward_adm/auth/pages/registration/view/registration_page.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
-import 'package:fforward_adm/widgets/views/auth_form_container.dart';
+import 'package:fforward_adm/auth/widgets/containers/auth_form_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

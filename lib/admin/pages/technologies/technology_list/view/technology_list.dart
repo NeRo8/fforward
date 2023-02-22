@@ -2,8 +2,8 @@ import 'package:fforward_adm/admin/pages/technologies/technology_detail/view/tec
 import 'package:fforward_adm/admin/pages/technologies/technology_list/controller/technology_list_controller.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 import 'package:fforward_adm/widgets/common_drawer/common_drawer.dart';
-import 'package:fforward_adm/widgets/tables/item_list_table.dart';
-import 'package:fforward_adm/widgets/views/page_container.dart';
+import 'package:fforward_adm/admin/widgets/tables/item_list_table.dart';
+import 'package:fforward_adm/widgets/containers/page_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

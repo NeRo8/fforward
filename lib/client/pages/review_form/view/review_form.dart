@@ -3,7 +3,7 @@ import 'package:fforward_adm/models/answer.dart';
 import 'package:fforward_adm/models/question.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/utils/urls.dart';
-import 'package:fforward_adm/widgets/pickers/level_picker/level_picker.dart';
+import 'package:fforward_adm/client/widgets/pickers/level_picker/level_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

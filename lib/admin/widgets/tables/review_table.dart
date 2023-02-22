@@ -2,7 +2,7 @@ import 'package:fforward_adm/admin/pages/review/review_list/controller/review_li
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/models/review.dart';
-import 'package:fforward_adm/widgets/tables/widgets.dart';
+import 'package:fforward_adm/admin/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutterfire_ui/database.dart';

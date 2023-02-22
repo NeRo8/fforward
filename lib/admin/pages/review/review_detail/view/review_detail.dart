@@ -1,11 +1,11 @@
 import 'package:fforward_adm/admin/pages/review/review_detail/controller/review_detail_controller.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/utils/validations.dart';
-import 'package:fforward_adm/widgets/tables/date_form_field.dart';
-import 'package:fforward_adm/widgets/tables/multiple_relative_form_field.dart';
-import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
-import 'package:fforward_adm/widgets/views/form_container.dart';
-import 'package:fforward_adm/widgets/views/page_container.dart';
+import 'package:fforward_adm/admin/widgets/tables/date_form_field.dart';
+import 'package:fforward_adm/admin/widgets/tables/multiple_relative_form_field.dart';
+import 'package:fforward_adm/admin/widgets/tables/relative_form_field.dart';
+import 'package:fforward_adm/widgets/containers/form_container.dart';
+import 'package:fforward_adm/widgets/containers/page_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

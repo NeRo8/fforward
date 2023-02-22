@@ -1,8 +1,7 @@
 import 'package:fforward_adm/admin/pages/review/review_detail/view/review_detail.dart';
-import 'package:fforward_adm/controller/users_store_controller.dart';
 import 'package:fforward_adm/widgets/common_drawer/common_drawer.dart';
-import 'package:fforward_adm/widgets/tables/review_table.dart';
-import 'package:fforward_adm/widgets/views/page_container.dart';
+import 'package:fforward_adm/admin/widgets/tables/review_table.dart';
+import 'package:fforward_adm/widgets/containers/page_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

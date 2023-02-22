@@ -4,11 +4,11 @@ import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
 import 'package:fforward_adm/utils/validations.dart';
-import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
+import 'package:fforward_adm/admin/widgets/tables/relative_form_field.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 
-import 'package:fforward_adm/widgets/views/form_container.dart';
-import 'package:fforward_adm/widgets/views/page_container.dart';
+import 'package:fforward_adm/widgets/containers/form_container.dart';
+import 'package:fforward_adm/widgets/containers/page_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

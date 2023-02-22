@@ -2,8 +2,8 @@ import 'package:fforward_adm/admin/pages/questions/questions_list/controller/que
 import 'package:fforward_adm/controller/developer_levels_store_controller.dart';
 import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:fforward_adm/models/question.dart';
-import 'package:fforward_adm/widgets/tables/url_table_field.dart';
-import 'package:fforward_adm/widgets/tables/widgets.dart';
+import 'package:fforward_adm/admin/widgets/tables/url_table_field.dart';
+import 'package:fforward_adm/admin/widgets/tables/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutterfire_ui/database.dart';
