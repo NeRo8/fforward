@@ -94,23 +94,22 @@ class ReviewDetailController extends GetxController {
 
   void onTapSubmit({bool withContinue = false}) async {
     try {
-      if (reviewForm.currentState!.validate()) {}
-      // if (reviewForm.currentState!.validate()) {
-      //   await _reviewService.createReview(
-      //     dateEnd: endDate.value!,
-      //     dateStart: startDate.value!,
-      //     technologies: selectedTechnologies,
-      //     reviewers: selectedReviewers,
-      //     specialist: selectedSpecialist.value!,
-      //     status: selectedStatus.value!,
-      //   );
+      if (reviewForm.currentState!.validate()) {
+        await _reviewService.createReview(
+          dateEnd: endDate.value!,
+          dateStart: startDate.value!,
+          technologies: selectedTechnologies,
+          reviewers: selectedReviewers,
+          specialist: selectedSpecialist.value!,
+          status: selectedStatus.value!,
+        );
 
-      //   if (!withContinue) {
-      //     Get.back();
-      //   }
+        if (!withContinue) {
+          Get.back();
+        }
 
-      //   commonSnackBar.callSuccessSnackBar();
-      // }
+        commonSnackBar.callSuccessSnackBar();
+      }
     } catch (e) {
       commonSnackBar.callErrorSnackBar();
     }
