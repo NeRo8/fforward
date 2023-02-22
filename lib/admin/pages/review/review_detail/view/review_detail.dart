@@ -1,5 +1,6 @@
 import 'package:fforward_adm/admin/pages/review/review_detail/controller/review_detail_controller.dart';
 import 'package:fforward_adm/models/technology.dart';
+import 'package:fforward_adm/utils/validations.dart';
 import 'package:fforward_adm/widgets/tables/date_form_field.dart';
 import 'package:fforward_adm/widgets/tables/multiple_relative_form_field.dart';
 import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
@@ -26,8 +27,7 @@ class ReviewDetail extends StatelessWidget {
               DateFormField(
                 controller: _controller.startDateController,
                 onTap: _controller.onTapStartDate,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: isEmptyValidation,
                 label: "Date start",
                 hint: "Select start date",
               ),
@@ -38,8 +38,7 @@ class ReviewDetail extends StatelessWidget {
                 startDate: _controller.startDate.value,
                 controller: _controller.endDateController,
                 onTap: _controller.onTapEndDate,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: isEmptyValidation,
                 label: "Date end",
                 hint: "Select end date",
               ),
@@ -50,19 +49,10 @@ class ReviewDetail extends StatelessWidget {
                 value: _controller.selectedSpecialist.value,
                 onTap: _controller.onTapSpecialist,
                 list: _controller.specialists,
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Required field';
-
-                  final isContain = _controller.selectedReviewers
-                      .firstWhereOrNull((item) =>
-                          item.id == _controller.selectedSpecialist.value?.id);
-
-                  if (isContain != null) {
-                    return "Specialist can't  make self review";
-                  }
-
-                  return null;
-                },
+                validator: (_) => isListContainValidation(
+                  _controller.selectedReviewers,
+                  _controller.selectedSpecialist.value,
+                ),
                 label: "Specialist",
                 hint: 'Select specialist',
               ),
@@ -73,19 +63,10 @@ class ReviewDetail extends StatelessWidget {
                 values: _controller.selectedReviewers,
                 onTap: _controller.onTapReviewers,
                 list: _controller.specialists,
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Required field';
-
-                  final isContain = _controller.selectedReviewers
-                      .firstWhereOrNull((item) =>
-                          item.id == _controller.selectedSpecialist.value?.id);
-
-                  if (isContain != null) {
-                    return "Specialist can't make self review";
-                  }
-
-                  return null;
-                },
+                validator: (_) => isListContainValidation(
+                  _controller.selectedReviewers,
+                  _controller.selectedSpecialist.value,
+                ),
                 label: "Reviewers",
                 hint: "Select reviewers",
               ),
@@ -96,8 +77,7 @@ class ReviewDetail extends StatelessWidget {
                 values: _controller.selectedTechnologies,
                 onTap: _controller.onTapTechnology,
                 list: _controller.technologies,
-                validator: (value) =>
-                    (value == null || value.isEmpty) ? 'Required field' : null,
+                validator: isEmptyValidation,
                 label: "Technologies",
                 hint: "Select technologies",
               ),

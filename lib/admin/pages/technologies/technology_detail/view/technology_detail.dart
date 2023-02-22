@@ -1,5 +1,6 @@
 import 'package:fforward_adm/admin/pages/technologies/technology_detail/controller/technology_detail_controller.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
+import 'package:fforward_adm/utils/validations.dart';
 import 'package:fforward_adm/widgets/views/form_container.dart';
 import 'package:fforward_adm/widgets/views/page_container.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,7 @@ class TechnologyDetail extends StatelessWidget {
           onTapSubmit: _controller.onTapSubmit,
           children: [
             TextFormField(
-              validator: (value) =>
-                  value!.isNotEmpty ? null : AppStrings.requiredField,
+              validator: isEmptyValidation,
               controller: _controller.titleController,
               decoration: const InputDecoration(
                 labelText: "Title",

@@ -3,6 +3,7 @@ import 'package:fforward_adm/models/developer_level.dart';
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/resources/app_colors.dart';
+import 'package:fforward_adm/utils/validations.dart';
 import 'package:fforward_adm/widgets/tables/relative_form_field.dart';
 import 'package:fforward_adm/resources/app_strings.dart';
 
@@ -33,6 +34,7 @@ class QuestionDetail extends StatelessWidget {
                 onTap: _controller.onTapTechnology,
                 hint: 'Select technology',
                 label: 'Technology',
+                validator: isEmptyValidation,
               ),
               const SizedBox(
                 height: 32,
@@ -43,12 +45,14 @@ class QuestionDetail extends StatelessWidget {
                 onTap: _controller.onTapDeveloperLevel,
                 label: 'Developer level',
                 hint: 'Select developer level',
+                validator: isEmptyValidation,
               ),
               const SizedBox(
                 height: 32,
               ),
               TextFormField(
                 controller: _controller.titleController,
+                validator: isEmptyValidation,
                 decoration: const InputDecoration(
                   labelText: 'Title',
                   hintText: 'Enter title',
