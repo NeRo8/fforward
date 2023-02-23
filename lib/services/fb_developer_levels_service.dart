@@ -11,20 +11,26 @@ class FBDeveloperLevelsService {
 
   DatabaseReference get table => _fbDB.ref(tableName);
 
+  Future<DataSnapshot> getDeveloperLevels() => table.get();
+
   Future<void> createDeveloperLevel({required String title}) async {
     DatabaseReference recordRef = table.push();
 
     recordRef.set(
-      DeveloperLevel(
-        id: recordRef.key ?? title.toLowerCase(),
-        title: title,
-      ).toJson(),
-    );
+        DeveloperLevel(id: recordRef.key ?? title.toLowerCase(), title: title)
+            .toJson());
   }
 
-  Future<void> updateDeveloperLevelById(DeveloperLevel developerLevel) async {}
+  Future<void> updateDeveloperLevelById(
+      String id, DeveloperLevel developerLevel) async {
+    DatabaseReference recordRef = _fbDB.ref("$tableName/$id");
 
-  Future<void> deleteDeveloperLevelById(String id) async {}
+    recordRef.update(developerLevel.toJson());
+  }
 
-  //Future<DataSnapshot> getDeveloperLevelById(String id) async {}
+  Future<void> deleteDeveloperLevelById(String id) async {
+    DatabaseReference recordRef = _fbDB.ref("$tableName/$id");
+
+    recordRef.remove();
+  }
 }

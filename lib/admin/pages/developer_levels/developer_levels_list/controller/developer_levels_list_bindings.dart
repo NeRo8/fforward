@@ -1,4 +1,5 @@
 import 'package:fforward_adm/admin/pages/developer_levels/developer_levels_list/controller/developer_levels_list_controller.dart';
+import 'package:fforward_adm/controller/developer_levels_store_controller.dart';
 import 'package:fforward_adm/services/fb_developer_levels_service.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,14 @@ class DeveloperLevelsListBindings extends Bindings {
     final FBDeveloperLevelsService developerLevelsService =
         FBDeveloperLevelsService(fbDB: FirebaseDatabase.instance);
 
+    final DeveloperLevelsStoreController developerLevelsStoreController =
+        Get.find<DeveloperLevelsStoreController>();
+
     Get.lazyPut(
       () => DeveloperLevelsListController(
-          developerLevelsService: developerLevelsService),
+        developerLevelsService: developerLevelsService,
+        developerLevelsStoreController: developerLevelsStoreController,
+      ),
     );
   }
 }

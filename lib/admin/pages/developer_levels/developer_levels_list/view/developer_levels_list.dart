@@ -31,8 +31,10 @@ class DeveloperLevelsList extends StatelessWidget {
             width: 32,
           ),
         ],
-        child: ItemListTable(
-          tableQuery: _controller.developerLevelsTable,
+        child: Obx(
+          () => ItemListTable(
+            data: _controller.developerLevelTable,
+          ),
         ),
       );
 }

@@ -11,10 +11,14 @@ class DeveloperLevelsStoreController extends GetxController {
   DeveloperLevelsStoreController({service}) : _service = service;
 
   @override
-  void onReady() {
-    super.onReady();
-    _service.table.get().then((snapshot) {
+  void onInit() {
+    super.onInit();
+
+    _service.getDeveloperLevels().then((snapshot) {
+      if (!snapshot.exists) return;
+
       final Map data = snapshot.value as Map;
+
       for (var element in data.values) {
         final value = DeveloperLevel.fromJson(element);
         developerLevelsStore.update((store) {
@@ -22,19 +26,33 @@ class DeveloperLevelsStoreController extends GetxController {
         });
       }
     });
+
+    _service.table.onChildAdded.listen((event) {
+      if (!event.snapshot.exists) return;
+
+      final DeveloperLevel developerLevel =
+          DeveloperLevel.fromJson(event.snapshot.value);
+
+      developerLevelsStore.update((store) {
+        store![developerLevel.id] = developerLevel;
+      });
+    });
+
+    _service.table.onChildRemoved.listen((event) {
+      if (!event.snapshot.exists) return;
+
+      final DeveloperLevel developerLevel =
+          DeveloperLevel.fromJson(event.snapshot.value);
+
+      developerLevelsStore.update((store) {
+        store!.remove(developerLevel.id);
+      });
+    });
   }
 
   List<DeveloperLevel> get developerLevels =>
-      developerLevelsStore.value.entries.map((e) => e.value).toList();
+      developerLevelsStore.value.values.toList();
 
   DeveloperLevel? getDeveloperLevelById(String id) =>
       developerLevelsStore.value[id];
-
-  String getDeveloperLevelName(String? id) {
-    if (id == null) return '';
-
-    final developerLevel = developerLevelsStore.value[id];
-
-    return developerLevel?.title ?? '';
-  }
 }

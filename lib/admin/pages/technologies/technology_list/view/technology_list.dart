@@ -30,8 +30,10 @@ class TechnologyList extends StatelessWidget {
             width: 32,
           ),
         ],
-        child: ItemListTable(
-          tableQuery: _controller.technologyTable,
-        ),
+        child: SizedBox(),
+        //TODO: rework this
+        // ItemListTable(
+        //   data: _controller.technologyTable,
+        // ),
       );
 }
