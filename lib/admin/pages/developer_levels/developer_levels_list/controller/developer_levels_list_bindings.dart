@@ -7,15 +7,11 @@ import 'package:get/get.dart';
 class DeveloperLevelsListBindings extends Bindings {
   @override
   void dependencies() {
-    final FBDeveloperLevelsService developerLevelsService =
-        FBDeveloperLevelsService(fbDB: FirebaseDatabase.instance);
-
     final DeveloperLevelsStoreController developerLevelsStoreController =
         Get.find<DeveloperLevelsStoreController>();
 
     Get.lazyPut(
       () => DeveloperLevelsListController(
-        developerLevelsService: developerLevelsService,
         developerLevelsStoreController: developerLevelsStoreController,
       ),
     );

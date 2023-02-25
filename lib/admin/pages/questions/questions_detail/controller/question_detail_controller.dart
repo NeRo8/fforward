@@ -55,9 +55,9 @@ class QuestionDetailController extends GetxController {
   }
 
   List<Technology> get technologies =>
-      _technologiesStoreController.technologies;
+      _technologiesStoreController.technologiesList;
   List<DeveloperLevel> get developerLevels =>
-      _developerLevelsStoreController.developerLevels;
+      _developerLevelsStoreController.developerLevelsList;
   List<Url> get urlsList => urls.entries.map((item) => item.value).toList();
 
   void onCreateUrl(String url, String title) {

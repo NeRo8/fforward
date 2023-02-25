@@ -29,7 +29,7 @@ class ReviewDetailController extends GetxController {
 
   final RxList<Technology> selectedTechnologies = <Technology>[].obs;
   List<Technology> get technologies =>
-      _technologiesStoreController.technologies;
+      _technologiesStoreController.technologiesList;
 
   final Rx<ListItem?> selectedSpecialist = Rx(null);
 

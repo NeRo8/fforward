@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fforward_adm/models/technology.dart';
 import 'package:fforward_adm/services/fb_technology_service.dart';
 import 'package:get/get.dart';
@@ -12,11 +10,14 @@ class TechnologiesStoreController extends GetxController {
   TechnologiesStoreController({service}) : _service = service;
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
 
-    _service.table.get().then((snapshot) {
+    _service.getTechnologies().then((snapshot) {
+      if (!snapshot.exists) return;
+
       final Map data = snapshot.value as Map;
+
       for (var element in data.values) {
         final value = Technology.fromJson(element);
         technologyStore.update((store) {
@@ -24,31 +25,30 @@ class TechnologiesStoreController extends GetxController {
         });
       }
     });
-  }
 
-  Technology? getTechnologyById(String id) => technologyStore.value[id];
+    _service.table.onChildAdded.listen((event) {
+      if (!event.snapshot.exists) return;
 
-  List<Technology> get technologies =>
-      technologyStore.value.entries.map((e) => e.value).toList();
+      final Technology technology = Technology.fromJson(event.snapshot.value);
 
-  String getTechnologyName(String? id) {
-    if (id == null) return '';
+      technologyStore.update((store) {
+        store![technology.id] = technology;
+      });
+    });
 
-    final technology = technologyStore.value[id];
+    _service.table.onChildRemoved.listen((event) {
+      if (!event.snapshot.exists) return;
 
-    return technology?.title ?? '';
-  }
+      final Technology technology = Technology.fromJson(event.snapshot.value);
 
-  String getTechnologiesName(String ids) {
-    final List<dynamic> technologies = json.decode(ids);
-
-    return technologies.fold<String>('', (previousValue, userId) {
-      final value = technologyStore.value[userId];
-
-      if (value != null) {
-        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${value.title}";
-      }
-      return previousValue;
+      technologyStore.update((store) {
+        store!.remove(technology.id);
+      });
     });
   }
+
+  List<Technology> get technologiesList =>
+      technologyStore.value.values.toList();
+
+  Technology? getTechnologyById(String id) => technologyStore.value[id];
 }

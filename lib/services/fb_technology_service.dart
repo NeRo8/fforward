@@ -11,6 +11,8 @@ class FBTechnologyService {
 
   DatabaseReference get table => _fbDB.ref(tableName);
 
+  Future<DataSnapshot> getTechnologies() => table.get();
+
   Future<void> createTechnology({required String title}) async {
     DatabaseReference recordRef = table.push();
     recordRef.set(
@@ -21,9 +23,15 @@ class FBTechnologyService {
     );
   }
 
-  Future<void> updateTechnologyById(Technology technology) async {}
+  Future<void> updateTechnologyById(String id, Technology technology) async {
+    DatabaseReference recordRef = _fbDB.ref("$tableName/$id");
 
-  Future<void> deleteTechnologyById(String id) async {}
+    recordRef.update(technology.toJson());
+  }
 
-  //Future<DataSnapshot> getDeveloperLevelById(String id) async {}
+  Future<void> deleteTechnologyById(String id) async {
+    DatabaseReference recordRef = _fbDB.ref("$tableName/$id");
+
+    recordRef.remove();
+  }
 }

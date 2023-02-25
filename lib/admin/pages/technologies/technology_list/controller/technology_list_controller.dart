@@ -1,12 +1,13 @@
-import 'package:fforward_adm/services/fb_technology_service.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
+import 'package:fforward_adm/models/technology.dart';
 import 'package:get/get.dart';
 
 class TechnologyListController extends GetxController {
-  final FBTechnologyService _technologyService;
+  final TechnologiesStoreController _technologiesStoreController;
 
-  TechnologyListController({technologyService})
-      : _technologyService = technologyService;
+  TechnologyListController({technologiesStoreController})
+      : _technologiesStoreController = technologiesStoreController;
 
-  DatabaseReference get technologyTable => _technologyService.table;
+  List<Technology> get technologyTable =>
+      _technologiesStoreController.technologiesList;
 }

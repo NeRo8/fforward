@@ -1,5 +1,4 @@
-import 'package:fforward_adm/services/fb_technology_service.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:fforward_adm/controller/technologies_store_controller.dart';
 import 'package:get/get.dart';
 
 import 'technology_list_controller.dart';
@@ -7,11 +6,12 @@ import 'technology_list_controller.dart';
 class TechnologyListBindings extends Bindings {
   @override
   void dependencies() {
-    final FBTechnologyService technologyService =
-        FBTechnologyService(fbDB: FirebaseDatabase.instance);
+    final TechnologiesStoreController technologiesStoreController =
+        Get.find<TechnologiesStoreController>();
 
     Get.lazyPut(
-      () => TechnologyListController(technologyService: technologyService),
+      () => TechnologyListController(
+          technologiesStoreController: technologiesStoreController),
     );
   }
 }

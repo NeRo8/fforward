@@ -50,7 +50,7 @@ class DeveloperLevelsStoreController extends GetxController {
     });
   }
 
-  List<DeveloperLevel> get developerLevels =>
+  List<DeveloperLevel> get developerLevelsList =>
       developerLevelsStore.value.values.toList();
 
   DeveloperLevel? getDeveloperLevelById(String id) =>
