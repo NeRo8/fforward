@@ -1,11 +1,12 @@
-import 'package:fforward_adm/services/fb_users_service.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:fforward_adm/controller/users_store_controller.dart';
+import 'package:fforward_adm/models/users.dart';
 import 'package:get/get.dart';
 
 class UsersListController extends GetxController {
-  final FBUsersService _usersService;
+  final UsersStoreController _usersStoreController;
 
-  UsersListController({usersService}) : _usersService = usersService;
+  UsersListController({required UsersStoreController usersStoreController})
+      : _usersStoreController = usersStoreController;
 
-  DatabaseReference get usersTable => _usersService.table;
+  List<Users> get usersTable => _usersStoreController.usersList;
 }

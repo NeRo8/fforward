@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fforward_adm/models/models.dart';
 import 'package:fforward_adm/models/users.dart';
 import 'package:fforward_adm/services/fb_users_service.dart';
@@ -11,19 +9,22 @@ class UsersStoreController extends GetxController {
 
   final Rx<Map<String, Users>> usersStore = Rx({});
 
-  UsersStoreController({service}) : _service = service;
+  UsersStoreController({required FBUsersService service}) : _service = service;
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
 
-    _service.table.get().then((snapshot) {
+    _service.getUsersTable().then((snapshot) {
+      if (!snapshot.exists) return;
+
       final Map data = snapshot.value as Map;
 
-      for (var value in data.values) {
-        final u = Users.fromJson(value);
+      for (var element in data.values) {
+        final value = Users.fromJson(element);
+
         usersStore.update((store) {
-          store![u.uid] = u;
+          store![value.uid] = value;
         });
       }
     });
@@ -31,20 +32,9 @@ class UsersStoreController extends GetxController {
 
   Users? getUserById(String id) => usersStore.value[id];
 
-  List<ListItem> get specialists => usersStore.value.entries
-      .map((e) => ListItem(
-          id: e.value.uid, title: "${e.value.firstname} ${e.value.lastname}"))
+  List<ListItem> get specialistsList => usersStore.value.values
+      .map((e) => ListItem(id: e.uid, title: "${e.firstname} ${e.lastname}"))
       .toList();
 
-  String getReviewersName(String ids) {
-    final List<dynamic> users = json.decode(ids);
-
-    return users.fold<String>('', (previousValue, userId) {
-      final value = usersStore.value[userId];
-      if (value != null) {
-        return "$previousValue${previousValue.isNotEmpty ? ', ' : ''}${value.fullname}";
-      }
-      return previousValue;
-    });
-  }
+  List<Users> get usersList => usersStore.value.values.toList();
 }

@@ -29,9 +29,7 @@ class FBUsersService {
     );
   }
 
-  Future<void> updateUserById(Users user) async {}
-
-  Future<void> deleteUserById(String uid) async {}
+  Future<DataSnapshot> getUsersTable() => table.get();
 
   Future<DataSnapshot> getUserById(String id) async =>
       _fbDB.ref("${tableName}/${id}").get();

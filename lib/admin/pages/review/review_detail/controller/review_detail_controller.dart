@@ -34,7 +34,7 @@ class ReviewDetailController extends GetxController {
   final Rx<ListItem?> selectedSpecialist = Rx(null);
 
   final RxList<ListItem> selectedReviewers = <ListItem>[].obs;
-  List<ListItem> get specialists => _usersStoreController.specialists;
+  List<ListItem> get specialists => _usersStoreController.specialistsList;
 
   ReviewDetailController({
     reviewService,
